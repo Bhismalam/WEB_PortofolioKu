@@ -4,12 +4,16 @@ import React, { useState } from 'react';
 import { Mail, MessageSquare, Send, CheckCircle2, PhoneCall } from 'lucide-react';
 import { IconGithub, IconLinkedin, IconInstagram } from '@/components/icons/SocialIcons';
 import { ProfileBio } from '@/types/portfolio';
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/lib/i18n/translations';
 
 interface ContactSectionProps {
   profile: ProfileBio;
 }
 
 export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
+  const { language } = useLanguage();
+  const t = translations[language].contact;
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
@@ -17,7 +21,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
-    // Simulate contact form submission / WhatsApp fallback
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
@@ -33,13 +36,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs font-mono-tech mb-4">
             <MessageSquare className="w-3.5 h-3.5" />
-            <span>Mari Berkolaborasi</span>
+            <span>{t.badge}</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Hubungi & <span className="gradient-text-cyan">Diskusi Project</span>
+            {t.title} <span className="gradient-text-cyan">{t.titleHighlight}</span>
           </h2>
           <p className="text-gray-400 mt-4 text-base sm:text-lg">
-            Punya ide proyek menarik, tawaran pekerjaan, atau ingin berkonsultasi? Kirim pesan langsung di bawah ini.
+            {t.subtitle}
           </p>
         </div>
 
@@ -49,10 +52,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
           <div className="lg:col-span-5 space-y-6">
             <div className="glass-card rounded-3xl p-6 sm:p-8 border border-white/10">
               <h3 className="text-xl font-bold text-white mb-4">
-                Informasi Kontak
+                {t.infoTitle}
               </h3>
               <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                Saya selalu terbuka untuk berdiskusi mengenai proyek web baru, desain antarmuka, atau kesempatan kolaborasi.
+                {t.infoDesc}
               </p>
 
               <div className="space-y-4">
@@ -64,7 +67,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-xs text-gray-400 font-mono-tech">Email Langsung</div>
+                    <div className="text-xs text-gray-400 font-mono-tech">{t.emailLabel}</div>
                     <div className="text-sm font-medium">contact@bhisma.dev</div>
                   </div>
                 </a>
@@ -79,7 +82,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                     <PhoneCall className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-xs text-gray-400 font-mono-tech">WhatsApp Direct</div>
+                    <div className="text-xs text-gray-400 font-mono-tech">{t.waLabel}</div>
                     <div className="text-sm font-medium">+62 812-3456-7890</div>
                   </div>
                 </a>
@@ -88,7 +91,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
               {/* Social Media Links */}
               <div className="mt-8 pt-6 border-t border-white/10">
                 <div className="text-xs text-gray-400 font-mono-tech mb-3 uppercase tracking-wider">
-                  Ikuti Media Sosial
+                  {t.socialsLabel}
                 </div>
                 <div className="flex items-center gap-3">
                   {profile.social_links.github && (
@@ -135,21 +138,21 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                   <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mb-4">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h4 className="text-2xl font-bold text-white mb-2">Pesan Terkirim!</h4>
+                  <h4 className="text-2xl font-bold text-white mb-2">{t.successTitle}</h4>
                   <p className="text-gray-400 text-sm max-w-sm">
-                    Terima kasih telah menghubungi. Saya akan membalas pesan Anda sesegera mungkin.
+                    {t.successDesc}
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
                     <label className="block text-xs font-mono-tech text-gray-300 mb-2">
-                      Nama Lengkap *
+                      {t.nameLabel}
                     </label>
                     <input 
                       type="text" 
                       required
-                      placeholder="Masukkan nama Anda..."
+                      placeholder={t.namePlaceholder}
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl glass-input text-sm"
@@ -158,7 +161,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
 
                   <div>
                     <label className="block text-xs font-mono-tech text-gray-300 mb-2">
-                      Alamat Email *
+                      {t.emailInputLabel}
                     </label>
                     <input 
                       type="email" 
@@ -172,12 +175,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
 
                   <div>
                     <label className="block text-xs font-mono-tech text-gray-300 mb-2">
-                      Pesan / Detail Proyek *
+                      {t.messageLabel}
                     </label>
                     <textarea 
                       rows={5}
                       required
-                      placeholder="Ceritakan detail proyek atau pertanyaan Anda..."
+                      placeholder={t.messagePlaceholder}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl glass-input text-sm resize-none"
@@ -189,7 +192,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                     className="w-full py-4 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-bold text-sm tracking-wide shadow-lg shadow-violet-700/30 hover:shadow-cyan-500/40 transition-all flex items-center justify-center gap-2 group"
                   >
                     <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    <span>Kirim Pesan Sekarang</span>
+                    <span>{t.sendBtn}</span>
                   </button>
                 </form>
               )}

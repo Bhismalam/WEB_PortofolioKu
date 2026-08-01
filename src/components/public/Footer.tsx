@@ -1,9 +1,14 @@
 'use client';
 
 import React from 'react';
-import { ArrowUp, Heart, Code2 } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/lib/i18n/translations';
 
 export const Footer: React.FC = () => {
+  const { language } = useLanguage();
+  const t = translations[language].footer;
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -19,23 +24,20 @@ export const Footer: React.FC = () => {
               BHISMA<span className="text-cyan-400">.DEV</span>
             </span>
             <p className="text-xs text-gray-400 mt-1 flex items-center justify-center md:justify-start gap-1">
-              &copy; {new Date().getFullYear()} All Rights Reserved. Built with Next.js 14, Tailwind & Supabase CMS.
+              &copy; {new Date().getFullYear()} {t.rights}
             </p>
           </div>
 
           {/* Center tech stack badge */}
           <div className="flex items-center gap-2 text-xs text-gray-400 font-mono-tech">
-            <span>Powered by</span>
-            <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-cyan-300">
-              Modern Tech CMS
-            </span>
+            <span>{t.poweredBy}</span>
           </div>
 
           {/* Back to top button */}
           <button 
             onClick={scrollToTop}
             className="p-3 rounded-full glass-card hover:bg-violet-600/30 text-gray-300 hover:text-white border border-white/15 transition-all shadow-lg hover:scale-110"
-            title="Kembali ke Atas"
+            title={t.backToTop}
           >
             <ArrowUp className="w-4 h-4" />
           </button>

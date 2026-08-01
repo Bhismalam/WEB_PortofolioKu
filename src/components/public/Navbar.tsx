@@ -1,8 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Download, Menu, X, Sparkles, UserCheck } from 'lucide-react';
+import { Download, Menu, X, Sparkles, Globe } from 'lucide-react';
 import { ProfileBio } from '@/types/portfolio';
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/lib/i18n/translations';
 
 interface NavbarProps {
   cvUrl?: string;
@@ -17,6 +19,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { language, toggleLanguage } = useLanguage();
+  const t = translations[language].nav;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,24 +59,36 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-1 bg-white/[0.03] backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10">
             <a href="#home" className="px-4 py-2 text-sm text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-full transition-all">
-              Home
+              {t.home}
             </a>
             <a href="#skills" className="px-4 py-2 text-sm text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-full transition-all">
-              Skills
+              {t.skills}
             </a>
             <a href="#projects" className="px-4 py-2 text-sm text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-full transition-all">
-              Projects
+              {t.projects}
             </a>
             <a href="#contact" className="px-4 py-2 text-sm text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-full transition-all">
-              Contact
+              {t.contact}
             </a>
             <a href="/admin/login" className="px-3 py-2 text-xs text-violet-400 hover:text-violet-300 hover:bg-violet-900/20 rounded-full transition-all font-mono-tech flex items-center gap-1">
-              <Sparkles className="w-3 h-3" /> Admin CMS
+              <Sparkles className="w-3 h-3" /> {t.admin}
             </a>
           </nav>
 
-          {/* Download CV CTA */}
+          {/* Language Switcher & Download CV CTA */}
           <div className="hidden sm:flex items-center gap-3">
+            {/* Language Switcher Toggle */}
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-full glass-card hover:bg-white/10 text-xs font-mono-tech border border-white/15 transition-all shadow-md hover:scale-105"
+              title="Ganti Bahasa / Switch Language"
+            >
+              <Globe className="w-3.5 h-3.5 text-cyan-400" />
+              <span className={language === 'id' ? 'text-cyan-300 font-bold' : 'text-gray-400'}>ID 🇮🇩</span>
+              <span className="text-gray-500">|</span>
+              <span className={language === 'en' ? 'text-cyan-300 font-bold' : 'text-gray-400'}>EN 🇬🇧</span>
+            </button>
+
             <a 
               href={cvUrl} 
               target="_blank" 
@@ -81,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <span className="relative px-5 py-2 transition-all ease-in duration-75 bg-[#0a0015] rounded-full group-hover:bg-opacity-0 flex items-center gap-2">
                 <Download className="w-4 h-4 text-cyan-400 group-hover:text-white transition-colors" />
-                <span>Download CV</span>
+                <span>{t.downloadCv}</span>
               </span>
             </a>
           </div>
@@ -100,40 +116,53 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
         <div className="md:hidden glass-navbar mt-2 border-b border-white/10 px-6 py-6 flex flex-col gap-4 animate-in slide-in-from-top duration-200">
+          <div className="flex justify-between items-center pb-2 border-b border-white/10">
+            <span className="text-xs text-gray-400 font-mono-tech">Pilih Bahasa:</span>
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full glass-card text-xs font-mono-tech border border-white/15"
+            >
+              <Globe className="w-3.5 h-3.5 text-cyan-400" />
+              <span className={language === 'id' ? 'text-cyan-300 font-bold' : 'text-gray-400'}>ID 🇮🇩</span>
+              <span className="text-gray-500">|</span>
+              <span className={language === 'en' ? 'text-cyan-300 font-bold' : 'text-gray-400'}>EN 🇬🇧</span>
+            </button>
+          </div>
+
           <a 
             href="#home" 
             onClick={() => setMobileMenuOpen(false)}
             className="text-gray-200 hover:text-cyan-400 py-2 border-b border-white/5"
           >
-            Home
+            {t.home}
           </a>
           <a 
             href="#skills" 
             onClick={() => setMobileMenuOpen(false)}
             className="text-gray-200 hover:text-cyan-400 py-2 border-b border-white/5"
           >
-            Skills & Tools
+            {t.skills}
           </a>
           <a 
             href="#projects" 
             onClick={() => setMobileMenuOpen(false)}
             className="text-gray-200 hover:text-cyan-400 py-2 border-b border-white/5"
           >
-            Projects Showcase
+            {t.projects}
           </a>
           <a 
             href="#contact" 
             onClick={() => setMobileMenuOpen(false)}
             className="text-gray-200 hover:text-cyan-400 py-2 border-b border-white/5"
           >
-            Contact Me
+            {t.contact}
           </a>
           <a 
             href="/admin/login" 
             onClick={() => setMobileMenuOpen(false)}
             className="text-violet-400 py-2 flex items-center gap-2 font-mono-tech text-sm"
           >
-            <Sparkles className="w-4 h-4" /> Dashboard Admin CMS
+            <Sparkles className="w-4 h-4" /> {t.admin}
           </a>
           <a 
             href={cvUrl}
@@ -141,7 +170,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             rel="noopener noreferrer"
             className="mt-2 w-full py-3 bg-gradient-to-r from-violet-600 to-cyan-500 rounded-xl font-medium text-white text-center flex items-center justify-center gap-2"
           >
-            <Download className="w-4 h-4" /> Download CV
+            <Download className="w-4 h-4" /> {t.downloadCv}
           </a>
         </div>
       )}

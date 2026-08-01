@@ -8,6 +8,8 @@ import {
   FolderKanban, ExternalLink, Play, Sparkles, Layers 
 } from 'lucide-react';
 import { IconGithub, IconFigma } from '@/components/icons/SocialIcons';
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/lib/i18n/translations';
 
 interface PortfolioShowcaseProps {
   projects: Project[];
@@ -18,11 +20,13 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
   projects,
   categories = MOCK_CATEGORIES 
 }) => {
+  const { language } = useLanguage();
+  const t = translations[language].projects;
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>('all');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const filterTabs = [
-    { id: 'all', label: 'Semua Karya' },
+    { id: 'all', label: t.all },
     ...categories.map(c => ({ id: c.slug, label: c.name }))
   ];
 
@@ -38,13 +42,13 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-mono-tech mb-4">
             <FolderKanban className="w-3.5 h-3.5" />
-            <span>Katalog Masterpiece</span>
+            <span>{t.badge}</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Portofolio & <span className="gradient-text-purple">Proyek Pilihan</span>
+            {t.title} <span className="gradient-text-purple">{t.titleHighlight}</span>
           </h2>
           <p className="text-gray-400 mt-4 text-base sm:text-lg">
-            Eksplorasi karya dalam berbagai bidang pengembangan web, desain, hingga pembuatan konten visual.
+            {t.subtitle}
           </p>
 
           {/* Dynamic Filtering Category Tabs */}
@@ -130,7 +134,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                   {/* Card Bottom Links Bar */}
                   <div className="flex items-center justify-between pt-4 border-t border-white/10 text-xs text-gray-400">
                     <span className="text-violet-400 group-hover:text-cyan-300 font-mono-tech flex items-center gap-1 font-medium">
-                      Detail Case Study &rarr;
+                      {t.caseStudy} &rarr;
                     </span>
 
                     <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>

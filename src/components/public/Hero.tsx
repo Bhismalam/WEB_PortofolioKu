@@ -3,25 +3,25 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Code2, Sparkles, FolderGit2, ShieldCheck, Terminal } from 'lucide-react';
 import { ProfileBio } from '@/types/portfolio';
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/lib/i18n/translations';
 
 interface HeroProps {
   profile: ProfileBio;
 }
 
-const ROLES = [
-  'Full-Stack Web Developer',
-  'UI/UX Designer',
-  'Social Media Content Creator',
-  'Next.js & Supabase Specialist'
-];
-
 export const Hero: React.FC<HeroProps> = ({ profile }) => {
+  const { language } = useLanguage();
+  const t = translations[language].hero;
+
   const [roleIndex, setRoleIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
 
+  const roles = t.roles;
+
   useEffect(() => {
-    const fullText = ROLES[roleIndex];
+    const fullText = roles[roleIndex % roles.length];
     const speed = isDeleting ? 40 : 80;
 
     const timer = setTimeout(() => {
@@ -29,7 +29,7 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
         setTimeout(() => setIsDeleting(true), 1500);
       } else if (isDeleting && currentText === '') {
         setIsDeleting(false);
-        setRoleIndex((prev) => (prev + 1) % ROLES.length);
+        setRoleIndex((prev) => (prev + 1) % roles.length);
       } else {
         setCurrentText(
           fullText.substring(0, currentText.length + (isDeleting ? -1 : 1))
@@ -38,7 +38,7 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
     }, speed);
 
     return () => clearTimeout(timer);
-  }, [currentText, isDeleting, roleIndex]);
+  }, [currentText, isDeleting, roleIndex, roles]);
 
   return (
     <section id="home" className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
@@ -54,19 +54,19 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
               </span>
               <span className="text-xs font-mono-tech text-cyan-300 font-medium tracking-wide">
-                {profile.status_badge || 'Available for Freelance & Full-time'}
+                {t.status}
               </span>
             </div>
 
             {/* Headline */}
             <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-none mb-4">
-              Halo, Saya <span className="gradient-text-purple">{profile.full_name}</span>
+              {t.salutation} <span className="gradient-text-purple">{profile.full_name}</span>
             </h1>
 
             {/* Dynamic Typewriter Role */}
             <div className="h-12 sm:h-14 mb-6 flex items-center">
               <span className="text-xl sm:text-3xl font-semibold text-gray-300 font-mono-tech">
-                Saya seorang{' '}
+                {t.typewriterPrefix}{' '}
                 <span className="gradient-text-cyan border-b-2 border-cyan-400 inline-block pb-0.5">
                   {currentText}
                 </span>
@@ -76,7 +76,7 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
 
             {/* Bio Summary */}
             <p className="text-base sm:text-lg text-gray-400 max-w-2xl leading-relaxed mb-8">
-              {profile.bio_summary}
+              {t.bio}
             </p>
 
             {/* CTA Buttons */}
@@ -85,7 +85,7 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
                 href="#projects"
                 className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-semibold shadow-lg shadow-violet-700/30 hover:shadow-cyan-500/40 transition-all flex items-center justify-center gap-2 group"
               >
-                <span>Lihat Karya Saya</span>
+                <span>{t.viewWork}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
 
@@ -94,7 +94,7 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
                 className="w-full sm:w-auto px-7 py-3.5 rounded-full glass-card hover:bg-white/10 text-gray-200 hover:text-white border border-white/15 font-medium transition-all text-center flex items-center justify-center gap-2"
               >
                 <Terminal className="w-4 h-4 text-cyan-400" />
-                <span>Hubungi Saya</span>
+                <span>{t.contactMe}</span>
               </a>
             </div>
 
@@ -103,22 +103,20 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
               <div>
                 <div className="text-2xl sm:text-3xl font-bold font-mono-tech text-white flex items-center gap-1">
                   <span>3+</span>
-                  <span className="text-cyan-400 text-lg">Thn</span>
                 </div>
-                <div className="text-xs text-gray-400 mt-1">Pengalaman Code</div>
+                <div className="text-xs text-gray-400 mt-1">{t.yearsExp}</div>
               </div>
               <div>
                 <div className="text-2xl sm:text-3xl font-bold font-mono-tech text-white flex items-center gap-1">
                   <span>25+</span>
-                  <span className="text-violet-400 text-lg">Proyek</span>
                 </div>
-                <div className="text-xs text-gray-400 mt-1">Selesai Dikembangkan</div>
+                <div className="text-xs text-gray-400 mt-1">{t.completedProj}</div>
               </div>
               <div>
                 <div className="text-2xl sm:text-3xl font-bold font-mono-tech text-white flex items-center gap-1">
                   <span>100%</span>
                 </div>
-                <div className="text-xs text-gray-400 mt-1">Kepuasan Klien</div>
+                <div className="text-xs text-gray-400 mt-1">{t.satisfaction}</div>
               </div>
             </div>
 
@@ -171,7 +169,7 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
                     name: <span className="text-emerald-300">&apos;{profile.full_name}&apos;</span>,
                   </div>
                   <div className="pl-4 text-gray-400">
-                    mode: <span className="text-emerald-300">&apos;Dynamic CMS Active&apos;</span>,
+                    mode: <span className="text-emerald-300">&apos;Multi-Language i18n Active&apos;</span>,
                   </div>
                   <div className="pl-4 text-gray-400">
                     stack: [<span className="text-amber-300">&apos;Next.js&apos;</span>, <span className="text-amber-300">&apos;Tailwind&apos;</span>, <span className="text-amber-300">&apos;Supabase&apos;</span>]

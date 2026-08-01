@@ -4,9 +4,11 @@ import React, { useState } from 'react';
 import { Skill } from '@/types/portfolio';
 import { 
   Code2, Atom, FileCode2, Palette, Server, Database, 
-  Sparkles, GitBranch, Cpu, Terminal, Layers, CheckCircle2 
+  Sparkles, GitBranch, Cpu, Terminal, Layers
 } from 'lucide-react';
 import { IconFigma } from '@/components/icons/SocialIcons';
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/lib/i18n/translations';
 
 interface SkillsBentoProps {
   skills: Skill[];
@@ -29,6 +31,8 @@ const renderSkillIcon = (iconName: string) => {
 };
 
 export const SkillsBento: React.FC<SkillsBentoProps> = ({ skills }) => {
+  const { language } = useLanguage();
+  const t = translations[language].skills;
   const [activeTab, setActiveTab] = useState<'all' | 'frontend' | 'backend' | 'design' | 'tools'>('all');
 
   const filteredSkills = activeTab === 'all' 
@@ -43,23 +47,23 @@ export const SkillsBento: React.FC<SkillsBentoProps> = ({ skills }) => {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs font-mono-tech mb-4">
             <Layers className="w-3.5 h-3.5" />
-            <span>Tech Stack & Tools</span>
+            <span>{t.badge}</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Keahlian & <span className="gradient-text-cyan">Teknologi</span>
+            {t.title} <span className="gradient-text-cyan">{t.titleHighlight}</span>
           </h2>
           <p className="text-gray-400 mt-4 text-base sm:text-lg">
-            Kumpulan tools, bahasa pemrograman, dan kerangka kerja modern yang saya gunakan untuk membangun aplikasi berskala tinggi.
+            {t.subtitle}
           </p>
 
           {/* Category Filter Tabs */}
           <div className="flex flex-wrap justify-center gap-2 mt-8">
             {[
-              { id: 'all', label: 'Semua Skills' },
-              { id: 'frontend', label: 'Front-End' },
-              { id: 'backend', label: 'Back-End' },
-              { id: 'design', label: 'UI/UX Design' },
-              { id: 'tools', label: 'Tools & DevOps' }
+              { id: 'all', label: t.all },
+              { id: 'frontend', label: t.frontend },
+              { id: 'backend', label: t.backend },
+              { id: 'design', label: t.design },
+              { id: 'tools', label: t.tools }
             ].map(tab => (
               <button
                 key={tab.id}
@@ -104,7 +108,7 @@ export const SkillsBento: React.FC<SkillsBentoProps> = ({ skills }) => {
               {/* Proficiency Meter */}
               <div className="w-full">
                 <div className="flex justify-between items-center text-xs mb-1.5 font-mono-tech">
-                  <span className="text-gray-400">Kemahiran</span>
+                  <span className="text-gray-400">{t.proficiency}</span>
                   <span className="text-cyan-400 font-bold">{skill.proficiency_level}%</span>
                 </div>
                 <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden p-0.5">
