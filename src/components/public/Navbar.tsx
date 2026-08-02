@@ -5,6 +5,7 @@ import { Download, Menu, X, Sparkles, Globe } from 'lucide-react';
 import { ProfileBio } from '@/types/portfolio';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/lib/i18n/translations';
+import { FlagID, FlagEN } from '@/components/icons/Flags';
 
 interface NavbarProps {
   cvUrl?: string;
@@ -64,6 +65,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             <a href="#skills" className="px-4 py-2 text-sm text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-full transition-all">
               {t.skills}
             </a>
+            <a href="#certificates" className="px-4 py-2 text-sm text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-full transition-all">
+              {t.certificates}
+            </a>
             <a href="#projects" className="px-4 py-2 text-sm text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-full transition-all">
               {t.projects}
             </a>
@@ -80,13 +84,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Language Switcher Toggle */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-full glass-card hover:bg-white/10 text-xs font-mono-tech border border-white/15 transition-all shadow-md hover:scale-105"
+              className="flex items-center gap-2 px-3.5 py-2 rounded-full glass-card hover:bg-white/10 text-xs font-mono-tech border border-white/15 transition-all shadow-md hover:scale-105"
               title="Ganti Bahasa / Switch Language"
             >
               <Globe className="w-3.5 h-3.5 text-cyan-400" />
-              <span className={language === 'id' ? 'text-cyan-300 font-bold' : 'text-gray-400'}>ID 🇮🇩</span>
-              <span className="text-gray-500">|</span>
-              <span className={language === 'en' ? 'text-cyan-300 font-bold' : 'text-gray-400'}>EN 🇬🇧</span>
+              <span className={`flex items-center gap-1.5 transition-colors ${language === 'id' ? 'text-cyan-300 font-bold' : 'text-gray-400 opacity-70 hover:opacity-100'}`}>
+                <FlagID className="w-4 h-3" /> ID
+              </span>
+              <span className="text-gray-600">|</span>
+              <span className={`flex items-center gap-1.5 transition-colors ${language === 'en' ? 'text-cyan-300 font-bold' : 'text-gray-400 opacity-70 hover:opacity-100'}`}>
+                <FlagEN className="w-4 h-3" /> EN
+              </span>
             </button>
 
             <a 
@@ -120,12 +128,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="text-xs text-gray-400 font-mono-tech">Pilih Bahasa:</span>
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full glass-card text-xs font-mono-tech border border-white/15"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-card text-xs font-mono-tech border border-white/15"
             >
               <Globe className="w-3.5 h-3.5 text-cyan-400" />
-              <span className={language === 'id' ? 'text-cyan-300 font-bold' : 'text-gray-400'}>ID 🇮🇩</span>
-              <span className="text-gray-500">|</span>
-              <span className={language === 'en' ? 'text-cyan-300 font-bold' : 'text-gray-400'}>EN 🇬🇧</span>
+              <span className={`flex items-center gap-1.5 transition-colors ${language === 'id' ? 'text-cyan-300 font-bold' : 'text-gray-400 opacity-70 hover:opacity-100'}`}>
+                <FlagID className="w-4 h-3" /> ID
+              </span>
+              <span className="text-gray-600">|</span>
+              <span className={`flex items-center gap-1.5 transition-colors ${language === 'en' ? 'text-cyan-300 font-bold' : 'text-gray-400 opacity-70 hover:opacity-100'}`}>
+                <FlagEN className="w-4 h-3" /> EN
+              </span>
             </button>
           </div>
 
@@ -142,6 +154,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="text-gray-200 hover:text-cyan-400 py-2 border-b border-white/5"
           >
             {t.skills}
+          </a>
+          <a 
+            href="#certificates" 
+            onClick={() => setMobileMenuOpen(false)}
+            className="text-gray-200 hover:text-cyan-400 py-2 border-b border-white/5"
+          >
+            {t.certificates}
           </a>
           <a 
             href="#projects" 

@@ -3,10 +3,11 @@ import { ConstellationBackground } from '@/components/public/ConstellationBackgr
 import { Navbar } from '@/components/public/Navbar';
 import { Hero } from '@/components/public/Hero';
 import { SkillsBento } from '@/components/public/SkillsBento';
+import { CertificatesSection } from '@/components/public/CertificatesSection';
 import { PortfolioShowcase } from '@/components/public/PortfolioShowcase';
 import { ContactSection } from '@/components/public/ContactSection';
 import { Footer } from '@/components/public/Footer';
-import { MOCK_PROFILE, MOCK_SKILLS, MOCK_PROJECTS } from '@/lib/supabase/client';
+import { MOCK_PROFILE, MOCK_SKILLS, MOCK_PROJECTS, MOCK_CERTIFICATES } from '@/lib/supabase/client';
 
 export const metadata = {
   title: 'Bhisma.dev - Full-Stack Developer & UI/UX Specialist Portfolio',
@@ -32,6 +33,9 @@ export default function HomePage() {
 
       {/* Skills & Tech Stack Bento Grid */}
       <SkillsBento skills={MOCK_SKILLS} />
+
+      {/* Official Certificates & Accreditations */}
+      <CertificatesSection certificates={MOCK_CERTIFICATES} />
 
       {/* Projects Catalog & Interactive Showcase */}
       <PortfolioShowcase projects={MOCK_PROJECTS} />

@@ -3,6 +3,7 @@ export const translations = {
     nav: {
       home: 'Home',
       skills: 'Skills',
+      certificates: 'Sertifikat',
       projects: 'Projects',
       contact: 'Contact',
       admin: 'Admin CMS',
@@ -69,6 +70,18 @@ export const translations = {
       successTitle: 'Pesan Terkirim!',
       successDesc: 'Terima kasih telah menghubungi. Saya akan membalas pesan Anda sesegera mungkin.'
     },
+    certificates: {
+      badge: 'Lisensi & Akreditasi',
+      title: 'Sertifikat &',
+      titleHighlight: 'Sertifikasi Resmi',
+      subtitle: 'Bukti validasi keahlian profesional dari lembaga terkemuka yang memverifikasi standar kompetensi saya.',
+      verifyBtn: 'Verifikasi Kredensial',
+      viewCert: 'Pratinjau Sertifikat',
+      credentialId: 'ID Kredensial',
+      issuedOn: 'Diterbitkan',
+      skillsCovered: 'Keahlian Teruji',
+      closeModal: 'Tutup'
+    },
     footer: {
       rights: 'All Rights Reserved. Built with Next.js 14, Tailwind & Supabase CMS.',
       poweredBy: 'Powered by Modern Tech CMS',
@@ -79,6 +92,7 @@ export const translations = {
     nav: {
       home: 'Home',
       skills: 'Skills',
+      certificates: 'Certificates',
       projects: 'Projects',
       contact: 'Contact',
       admin: 'Admin CMS',
@@ -144,6 +158,18 @@ export const translations = {
       sendBtn: 'Send Message Now',
       successTitle: 'Message Sent!',
       successDesc: 'Thank you for reaching out. I will respond to your message as soon as possible.'
+    },
+    certificates: {
+      badge: 'Licenses & Accreditations',
+      title: 'Certificates &',
+      titleHighlight: 'Official Certifications',
+      subtitle: 'Validation of professional skills from leading institutions verifying my technical competence standards.',
+      verifyBtn: 'Verify Credential',
+      viewCert: 'Preview Certificate',
+      credentialId: 'Credential ID',
+      issuedOn: 'Issued Date',
+      skillsCovered: 'Validated Skills',
+      closeModal: 'Close'
     },
     footer: {
       rights: 'All Rights Reserved. Built with Next.js 14, Tailwind & Supabase CMS.',

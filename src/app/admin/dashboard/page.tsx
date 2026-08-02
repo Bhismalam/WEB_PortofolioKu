@@ -4,26 +4,28 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { 
   FolderKanban, Layers, UserCheck, Plus, Trash2, Edit3, 
-  LogOut, Database, FileText, Upload, Globe, Tag 
+  LogOut, Database, FileText, Upload, Globe, Tag, Award, ShieldCheck 
 } from 'lucide-react';
-import { Project, Skill, ProfileBio, ProjectCategory, Category } from '@/types/portfolio';
-import { MOCK_PROJECTS, MOCK_SKILLS, MOCK_PROFILE, MOCK_CATEGORIES } from '@/lib/supabase/client';
+import { Project, Skill, ProfileBio, ProjectCategory, Category, Certificate } from '@/types/portfolio';
+import { MOCK_PROJECTS, MOCK_SKILLS, MOCK_PROFILE, MOCK_CATEGORIES, MOCK_CERTIFICATES } from '@/lib/supabase/client';
 import { ConfirmModal } from '@/components/admin/ConfirmModal';
+import { Portal } from '@/components/public/Portal';
 
 export default function AdminDashboardPage() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState<'projects' | 'skills' | 'categories' | 'profile'>('projects');
+  const [activeTab, setActiveTab] = useState<'projects' | 'skills' | 'categories' | 'certificates' | 'profile'>('projects');
   
   // Data State
   const [projects, setProjects] = useState<Project[]>(MOCK_PROJECTS);
   const [skills, setSkills] = useState<Skill[]>(MOCK_SKILLS);
   const [profile, setProfile] = useState<ProfileBio>(MOCK_PROFILE);
   const [categories, setCategories] = useState<Category[]>(MOCK_CATEGORIES);
+  const [certificates, setCertificates] = useState<Certificate[]>(MOCK_CERTIFICATES);
 
   // Custom Delete Confirm Modal State
   const [confirmDelete, setConfirmDelete] = useState<{
     isOpen: boolean;
-    type: 'project' | 'skill' | 'category' | null;
+    type: 'project' | 'skill' | 'category' | 'certificate' | null;
     id: string | null;
     title: string;
     message: string;
@@ -68,6 +70,44 @@ export default function AdminDashboardPage() {
     setProfile(prev => ({ ...prev, cv_pdf_url: objectUrl }));
   };
 
+  // Handler for Certificate Image File Upload
+  const handleCertImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      alert('Harap pilih file gambar berformat PNG, JPG, atau WEBP!');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.result) {
+        setCertForm(prev => ({ ...prev, image_url: reader.result as string }));
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  // Handler for Project Thumbnail File Upload
+  const handleProjectImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      alert('Harap pilih file gambar berformat PNG, JPG, atau WEBP!');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.result) {
+        setProjectForm(prev => ({ ...prev, thumbnail_url: reader.result as string }));
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
   // Form State for Skill CRUD
   const [showSkillModal, setShowSkillModal] = useState(false);
   const [skillForm, setSkillForm] = useState({
@@ -81,6 +121,19 @@ export default function AdminDashboardPage() {
   // Form State for Category CRUD
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState('');
+
+  // Form State for Certificate CRUD
+  const [showCertModal, setShowCertModal] = useState(false);
+  const [editingCert, setEditingCert] = useState<Certificate | null>(null);
+  const [certForm, setCertForm] = useState({
+    title: '',
+    issuer: '',
+    issue_date: '',
+    credential_id: '',
+    credential_url: '',
+    image_url: '',
+    skills_raw: ''
+  });
 
   const handleLogout = () => {
     localStorage.removeItem('admin_authenticated');
@@ -211,6 +264,17 @@ export default function AdminDashboardPage() {
     });
   };
 
+  // Trigger Custom Delete Confirmation Modal for Certificate
+  const promptDeleteCert = (cert: Certificate) => {
+    setConfirmDelete({
+      isOpen: true,
+      type: 'certificate',
+      id: cert.id,
+      title: `Hapus Sertifikat "${cert.title}"?`,
+      message: `Apakah Anda yakin ingin menghapus sertifikat "${cert.title}" ini dari lisensi publik?`
+    });
+  };
+
   // Execute Deletion after confirmation
   const handleConfirmDelete = () => {
     if (confirmDelete.type === 'project' && confirmDelete.id) {
@@ -219,6 +283,8 @@ export default function AdminDashboardPage() {
       setSkills(skills.filter(s => s.id !== confirmDelete.id));
     } else if (confirmDelete.type === 'category' && confirmDelete.id) {
       setCategories(categories.filter(c => c.id !== confirmDelete.id));
+    } else if (confirmDelete.type === 'certificate' && confirmDelete.id) {
+      setCertificates(certificates.filter(c => c.id !== confirmDelete.id));
     }
     setConfirmDelete({ isOpen: false, type: null, id: null, title: '', message: '' });
   };
@@ -237,6 +303,67 @@ export default function AdminDashboardPage() {
     setSkills([...skills, newSkill]);
     setShowSkillModal(false);
     setSkillForm({ name: '', category: 'frontend', icon_name: 'Code2', proficiency_level: 85, experience_years: '2+ Thn' });
+  };
+
+  // Open Certificate Form for Create or Edit
+  const openCertForm = (cert?: Certificate) => {
+    if (cert) {
+      setEditingCert(cert);
+      setCertForm({
+        title: cert.title,
+        issuer: cert.issuer,
+        issue_date: cert.issue_date,
+        credential_id: cert.credential_id || '',
+        credential_url: cert.credential_url || '',
+        image_url: cert.image_url,
+        skills_raw: cert.skills ? cert.skills.join(', ') : ''
+      });
+    } else {
+      setEditingCert(null);
+      setCertForm({
+        title: '',
+        issuer: '',
+        issue_date: 'Jan 2024',
+        credential_id: '',
+        credential_url: '',
+        image_url: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
+        skills_raw: 'React.js, TypeScript'
+      });
+    }
+    setShowCertModal(true);
+  };
+
+  // Save Certificate (Create or Update)
+  const handleSaveCert = (e: React.FormEvent) => {
+    e.preventDefault();
+    const skillsArray = certForm.skills_raw.split(',').map(s => s.trim()).filter(Boolean);
+
+    if (editingCert) {
+      setCertificates(certificates.map(c => c.id === editingCert.id ? {
+        ...c,
+        title: certForm.title,
+        issuer: certForm.issuer,
+        issue_date: certForm.issue_date,
+        credential_id: certForm.credential_id,
+        credential_url: certForm.credential_url,
+        image_url: certForm.image_url,
+        skills: skillsArray
+      } : c));
+    } else {
+      const newCert: Certificate = {
+        id: 'cert-' + Date.now(),
+        title: certForm.title,
+        issuer: certForm.issuer,
+        issue_date: certForm.issue_date,
+        credential_id: certForm.credential_id,
+        credential_url: certForm.credential_url,
+        image_url: certForm.image_url,
+        skills: skillsArray
+      };
+      setCertificates([newCert, ...certificates]);
+    }
+
+    setShowCertModal(false);
   };
 
   return (
@@ -292,6 +419,17 @@ export default function AdminDashboardPage() {
             </button>
 
             <button
+              onClick={() => setActiveTab('certificates')}
+              className={`w-full px-4 py-3 rounded-xl text-xs font-mono-tech flex items-center gap-2.5 transition-colors ${
+                activeTab === 'certificates' 
+                  ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold shadow-lg shadow-violet-900/40' 
+                  : 'text-gray-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <Award className="w-4 h-4" /> Kelola Sertifikat ({certificates.length})
+            </button>
+
+            <button
               onClick={() => setActiveTab('profile')}
               className={`w-full px-4 py-3 rounded-xl text-xs font-mono-tech flex items-center gap-2.5 transition-colors ${
                 activeTab === 'profile' 
@@ -332,6 +470,7 @@ export default function AdminDashboardPage() {
               {activeTab === 'projects' && 'Kelola Katalog Proyek'}
               {activeTab === 'categories' && 'Kelola Kategori Portofolio'}
               {activeTab === 'skills' && 'Kelola Tech Stack & Skills'}
+              {activeTab === 'certificates' && 'Kelola Lisensi & Sertifikasi Resmi'}
               {activeTab === 'profile' && 'Pengaturan Profil & Dynamic CV'}
             </h1>
             <p className="text-xs text-gray-400 mt-1 font-mono-tech">
@@ -498,6 +637,103 @@ export default function AdminDashboardPage() {
           </div>
         )}
 
+        {/* TAB 4: CERTIFICATES MANAGEMENT */}
+        {activeTab === 'certificates' && (
+          <div>
+            <div className="flex justify-between items-center mb-6">
+              <div>
+                <h2 className="text-lg font-bold text-white">Daftar Sertifikat & Akreditasi</h2>
+                <p className="text-xs text-gray-400 mt-1 font-mono-tech">
+                  Sertifikat di bawah akan tampil di section publik `#certificates` untuk memvalidasi kompetensi Anda.
+                </p>
+              </div>
+              <button
+                onClick={() => openCertForm()}
+                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-medium text-xs font-mono-tech flex items-center gap-2 shadow-lg shadow-violet-900/30"
+              >
+                <Plus className="w-4 h-4" /> Tambah Sertifikat Baru
+              </button>
+            </div>
+
+            {/* Certificates Table */}
+            <div className="glass-card rounded-2xl border border-white/10 overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-white/5 text-gray-400 font-mono-tech uppercase border-b border-white/10">
+                  <tr>
+                    <th className="p-4">Gambar & Judul Sertifikat</th>
+                    <th className="p-4">Penerbit & Tanggal</th>
+                    <th className="p-4">ID / Link Kredensial</th>
+                    <th className="p-4">Keahlian Teruji</th>
+                    <th className="p-4 text-right">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {certificates.map((cert) => (
+                    <tr key={cert.id} className="hover:bg-white/[0.02]">
+                      <td className="p-4 flex items-center gap-3">
+                        <img 
+                          src={cert.image_url} 
+                          alt={cert.title}
+                          className="w-14 h-10 rounded-lg object-cover border border-white/10 flex-shrink-0"
+                        />
+                        <div>
+                          <div className="font-bold text-white text-sm">{cert.title}</div>
+                        </div>
+                      </td>
+                      <td className="p-4 font-mono-tech">
+                        <div className="text-cyan-300 font-bold">{cert.issuer}</div>
+                        <div className="text-gray-400 text-[11px]">{cert.issue_date}</div>
+                      </td>
+                      <td className="p-4 font-mono-tech text-gray-300">
+                        {cert.credential_id && (
+                          <div className="text-violet-300">ID: {cert.credential_id}</div>
+                        )}
+                        {cert.credential_url ? (
+                          <a 
+                            href={cert.credential_url} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-cyan-400 hover:underline flex items-center gap-1 text-[11px] mt-0.5"
+                          >
+                            <ShieldCheck className="w-3 h-3" /> Verifikasi URL
+                          </a>
+                        ) : (
+                          <span className="text-gray-500 italic">Tanpa Link</span>
+                        )}
+                      </td>
+                      <td className="p-4">
+                        <div className="flex flex-wrap gap-1 max-w-xs">
+                          {cert.skills?.map((s, idx) => (
+                            <span key={idx} className="px-2 py-0.5 rounded bg-violet-900/30 text-violet-300 font-mono-tech text-[10px]">
+                              {s}
+                            </span>
+                          ))}
+                        </div>
+                      </td>
+                      <td className="p-4 text-right space-x-2">
+                        <button
+                          onClick={() => openCertForm(cert)}
+                          className="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-cyan-400"
+                          title="Edit Sertifikat"
+                        >
+                          <Edit3 className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => promptDeleteCert(cert)}
+                          className="p-2 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400"
+                          title="Hapus Sertifikat"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
         {/* TAB 4: PROFILE & RESUME */}
         {activeTab === 'profile' && (
           <div className="max-w-2xl glass-card rounded-3xl p-8 border border-white/10">
@@ -591,7 +827,8 @@ export default function AdminDashboardPage() {
 
       {/* PROJECT CRUD MODAL */}
       {showProjectModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <Portal>
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
           <div className="glass-card w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-8 border border-white/20 bg-[#0a0015]">
             <h3 className="text-xl font-bold text-white mb-4">
               {editingProject ? 'Edit Proyek' : 'Tambah Proyek Baru'}
@@ -638,13 +875,69 @@ export default function AdminDashboardPage() {
               </div>
 
               <div>
-                <label className="block text-gray-300 mb-1">Thumbnail Image URL *</label>
+                <label className="block text-gray-300 mb-1 flex items-center justify-between">
+                  <span>Thumbnail Image *</span>
+                  <span className="text-[10px] text-cyan-400">Upload File atau Input Link URL</span>
+                </label>
+
+                {/* Dropzone / Preview Box for Project Thumbnail */}
+                <div className="p-4 rounded-2xl border-2 border-dashed border-white/20 bg-white/[0.02] text-center hover:border-cyan-400/60 transition-colors mb-3">
+                  {projectForm.thumbnail_url ? (
+                    <div className="relative group rounded-xl overflow-hidden max-h-40 bg-black border border-white/10 mb-2">
+                      <img 
+                        src={projectForm.thumbnail_url} 
+                        alt="Preview Thumbnail" 
+                        className="w-full h-36 object-contain mx-auto"
+                      />
+                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                        <label 
+                          htmlFor="proj-image-input" 
+                          className="px-3 py-1.5 rounded-lg bg-cyan-500 text-black font-bold cursor-pointer text-[11px] hover:bg-cyan-400"
+                        >
+                          Ganti Gambar
+                        </label>
+                        <button
+                          type="button"
+                          onClick={() => setProjectForm({ ...projectForm, thumbnail_url: '' })}
+                          className="px-3 py-1.5 rounded-lg bg-rose-500 text-white font-bold text-[11px] hover:bg-rose-400"
+                        >
+                          Hapus
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="py-3">
+                      <Upload className="w-7 h-7 text-cyan-400 mx-auto mb-1 animate-bounce" />
+                      <p className="text-gray-300 text-xs mb-0.5 font-bold">Pilih File Thumbnail Proyek (PNG, JPG, WEBP)</p>
+                      <p className="text-[10px] text-gray-400">Pilih file gambar langsung dari perangkat Anda</p>
+                    </div>
+                  )}
+
+                  <input 
+                    type="file" 
+                    accept="image/*" 
+                    id="proj-image-input"
+                    onChange={handleProjectImageUpload}
+                    className="hidden" 
+                  />
+                  
+                  {!projectForm.thumbnail_url && (
+                    <label 
+                      htmlFor="proj-image-input" 
+                      className="inline-block mt-2 px-4 py-1.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold cursor-pointer hover:opacity-90 shadow-md shadow-violet-900/40 transition-all text-xs"
+                    >
+                      Upload Gambar Proyek
+                    </label>
+                  )}
+                </div>
+
                 <input 
                   type="text" 
                   required
+                  placeholder="https://... atau data:image/..."
                   value={projectForm.thumbnail_url}
                   onChange={(e) => setProjectForm({ ...projectForm, thumbnail_url: e.target.value })}
-                  className="w-full p-3 rounded-xl glass-input"
+                  className="w-full p-3 rounded-xl glass-input text-xs"
                 />
               </div>
 
@@ -708,11 +1001,13 @@ export default function AdminDashboardPage() {
             </form>
           </div>
         </div>
+        </Portal>
       )}
 
       {/* CATEGORY CRUD MODAL */}
       {showCategoryModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <Portal>
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
           <div className="glass-card w-full max-w-md rounded-3xl p-6 border border-white/20 bg-[#0a0015]">
             <h3 className="text-xl font-bold text-white mb-4">Tambah Kategori Baru</h3>
             <form onSubmit={handleAddCategory} className="space-y-4 text-xs font-mono-tech">
@@ -746,11 +1041,13 @@ export default function AdminDashboardPage() {
             </form>
           </div>
         </div>
+        </Portal>
       )}
 
       {/* SKILL CRUD MODAL */}
       {showSkillModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <Portal>
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
           <div className="glass-card w-full max-w-md rounded-3xl p-6 border border-white/20 bg-[#0a0015]">
             <h3 className="text-xl font-bold text-white mb-4">Tambah Skill Baru</h3>
             <form onSubmit={handleAddSkill} className="space-y-4 text-xs font-mono-tech">
@@ -809,6 +1106,179 @@ export default function AdminDashboardPage() {
             </form>
           </div>
         </div>
+        </Portal>
+      )}
+
+      {/* CERTIFICATE CRUD MODAL */}
+      {showCertModal && (
+        <Portal>
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+          <div className="glass-card w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-8 border border-white/20 bg-[#0a0015]">
+            <h3 className="text-xl font-bold text-white mb-4">
+              {editingCert ? 'Edit Sertifikat' : 'Tambah Sertifikat Baru'}
+            </h3>
+
+            <form onSubmit={handleSaveCert} className="space-y-4 text-xs font-mono-tech">
+              <div>
+                <label className="block text-gray-300 mb-1">Judul Sertifikat *</label>
+                <input 
+                  type="text" 
+                  required
+                  placeholder="Contoh: Meta Front-End Developer Professional"
+                  value={certForm.title}
+                  onChange={(e) => setCertForm({ ...certForm, title: e.target.value })}
+                  className="w-full p-3 rounded-xl glass-input"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-gray-300 mb-1">Penerbit / Institusi *</label>
+                  <input 
+                    type="text" 
+                    required
+                    placeholder="Contoh: Coursera / Meta / Google"
+                    value={certForm.issuer}
+                    onChange={(e) => setCertForm({ ...certForm, issuer: e.target.value })}
+                    className="w-full p-3 rounded-xl glass-input"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-300 mb-1">Tanggal Terbit *</label>
+                  <input 
+                    type="text" 
+                    required
+                    placeholder="Contoh: Jan 2024"
+                    value={certForm.issue_date}
+                    onChange={(e) => setCertForm({ ...certForm, issue_date: e.target.value })}
+                    className="w-full p-3 rounded-xl glass-input"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-gray-300 mb-1">ID Kredensial (Opsional)</label>
+                  <input 
+                    type="text" 
+                    placeholder="Contoh: CERT-META-FE-8921"
+                    value={certForm.credential_id}
+                    onChange={(e) => setCertForm({ ...certForm, credential_id: e.target.value })}
+                    className="w-full p-3 rounded-xl glass-input"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-300 mb-1">URL Verifikasi Kredensial (Opsional)</label>
+                  <input 
+                    type="text" 
+                    placeholder="https://coursera.org/verify/..."
+                    value={certForm.credential_url}
+                    onChange={(e) => setCertForm({ ...certForm, credential_url: e.target.value })}
+                    className="w-full p-3 rounded-xl glass-input"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-gray-300 mb-1 flex items-center justify-between">
+                  <span>Gambar / Tangkapan Layar Sertifikat *</span>
+                  <span className="text-[10px] text-cyan-400 font-bold">Upload File atau Input Link URL</span>
+                </label>
+
+                {/* Dropzone & Live Image Preview Box */}
+                <div className="p-4 rounded-2xl border-2 border-dashed border-white/20 bg-white/[0.02] text-center hover:border-cyan-400/60 transition-colors mb-3">
+                  {certForm.image_url ? (
+                    <div className="relative group rounded-xl overflow-hidden max-h-48 bg-black border border-white/10 mb-2">
+                      <img 
+                        src={certForm.image_url} 
+                        alt="Preview Sertifikat" 
+                        className="w-full h-44 object-contain mx-auto"
+                      />
+                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                        <label 
+                          htmlFor="cert-image-input" 
+                          className="px-3.5 py-1.5 rounded-lg bg-cyan-500 text-black font-bold cursor-pointer text-[11px] hover:bg-cyan-400 transition-colors shadow-md"
+                        >
+                          Ganti Gambar
+                        </label>
+                        <button
+                          type="button"
+                          onClick={() => setCertForm({ ...certForm, image_url: '' })}
+                          className="px-3.5 py-1.5 rounded-lg bg-rose-500 text-white font-bold text-[11px] hover:bg-rose-400 transition-colors shadow-md"
+                        >
+                          Hapus Gambar
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="py-4">
+                      <Upload className="w-8 h-8 text-cyan-400 mx-auto mb-2 animate-bounce" />
+                      <p className="text-gray-200 text-xs mb-1 font-bold">Pilih File Gambar Sertifikat (PNG, JPG, WEBP)</p>
+                      <p className="text-[10px] text-gray-400">Pilih berkas foto/scan sertifikat dari galeri komputer Anda</p>
+                    </div>
+                  )}
+
+                  <input 
+                    type="file" 
+                    accept="image/*" 
+                    id="cert-image-input"
+                    onChange={handleCertImageUpload}
+                    className="hidden" 
+                  />
+                  
+                  {!certForm.image_url && (
+                    <label 
+                      htmlFor="cert-image-input" 
+                      className="inline-block mt-2 px-5 py-2 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold cursor-pointer hover:opacity-90 shadow-md shadow-violet-900/40 transition-all text-xs"
+                    >
+                      Pilih File Dari Komputer
+                    </label>
+                  )}
+                </div>
+
+                <div>
+                  <span className="text-[10px] text-gray-400 mb-1 block">Atau masukkan Link / URL Gambar Eksternal:</span>
+                  <input 
+                    type="text" 
+                    required
+                    placeholder="https://... atau data:image/..."
+                    value={certForm.image_url}
+                    onChange={(e) => setCertForm({ ...certForm, image_url: e.target.value })}
+                    className="w-full p-3 rounded-xl glass-input text-xs"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-gray-300 mb-1">Keahlian Teruji (pisahkan koma)</label>
+                <input 
+                  type="text" 
+                  placeholder="React.js, TypeScript, UI/UX"
+                  value={certForm.skills_raw}
+                  onChange={(e) => setCertForm({ ...certForm, skills_raw: e.target.value })}
+                  className="w-full p-3 rounded-xl glass-input"
+                />
+              </div>
+
+              <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+                <button
+                  type="button"
+                  onClick={() => setShowCertModal(false)}
+                  className="px-5 py-2.5 rounded-xl glass-card text-gray-300 hover:text-white"
+                >
+                  Batal
+                </button>
+                <button
+                  type="submit"
+                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold"
+                >
+                  Simpan Sertifikat
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        </Portal>
       )}
 
       {/* CUSTOM CONFIRM DELETE MODAL */}

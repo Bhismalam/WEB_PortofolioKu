@@ -138,3 +138,41 @@ option {
 .font-mono-tech {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
+
+/* Animations & Micro-Interactions */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-ambient {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.03);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse-ambient {
+  animation: pulse-ambient 3s ease-in-out infinite;
+}
+
+/* Responsive Touch Feedback */
+@media (hover: none) {
+  .touch-active-scale:active {
+    transform: scale(0.97) !important;
+    transition: transform 0.15s ease-out !important;
+  }
+}
+
