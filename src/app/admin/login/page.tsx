@@ -2,26 +2,37 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Lock, Mail, KeyRound, Sparkles, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Lock, Mail, KeyRound, Sparkles, ArrowRight, ShieldCheck, AlertTriangle } from 'lucide-react';
 import { ConstellationBackground } from '@/components/public/ConstellationBackground';
+import { supabase } from '@/lib/supabase/client';
 
 export default function AdminLoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setError(null);
 
-    // Simulate Auth / Supabase auth check
-    setTimeout(() => {
-      setLoading(false);
-      // Save session in localStorage for demo
-      localStorage.setItem('admin_authenticated', 'true');
-      router.push('/admin/dashboard');
-    }, 1200);
+    if (!supabase) {
+      setError('Supabase belum dikonfigurasi. Set NEXT_PUBLIC_SUPABASE_URL & NEXT_PUBLIC_SUPABASE_ANON_KEY di .env.local.');
+      return;
+    }
+
+    setLoading(true);
+    const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
+    setLoading(false);
+
+    if (authError) {
+      setError('Email atau password salah.');
+      return;
+    }
+
+    router.push('/admin/dashboard');
+    router.refresh();
   };
 
   return (
@@ -82,6 +93,13 @@ export default function AdminLoginPage() {
               </div>
             </div>
 
+            {error && (
+              <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-mono-tech">
+                <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0" />
+                {error}
+              </div>
+            )}
+
             <button
               type="submit"
               disabled={loading}
@@ -101,10 +119,9 @@ export default function AdminLoginPage() {
             </button>
           </form>
 
-          {/* Quick Demo Access Note */}
           <div className="mt-6 pt-5 border-t border-white/10 text-center">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[11px] font-mono-tech border border-emerald-500/20">
-              <ShieldCheck className="w-3.5 h-3.5" /> Demo Admin Access Granted
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-500/10 text-violet-300 text-[11px] font-mono-tech border border-violet-500/20">
+              <ShieldCheck className="w-3.5 h-3.5" /> Diamankan dengan Supabase Auth
             </div>
           </div>
         </div>

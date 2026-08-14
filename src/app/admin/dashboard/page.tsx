@@ -7,7 +7,7 @@ import {
   LogOut, Database, FileText, Upload, Globe, Tag, Award, ShieldCheck 
 } from 'lucide-react';
 import { Project, Skill, ProfileBio, ProjectCategory, Category, Certificate } from '@/types/portfolio';
-import { MOCK_PROJECTS, MOCK_SKILLS, MOCK_PROFILE, MOCK_CATEGORIES, MOCK_CERTIFICATES } from '@/lib/supabase/client';
+import { MOCK_PROJECTS, MOCK_SKILLS, MOCK_PROFILE, MOCK_CATEGORIES, MOCK_CERTIFICATES, supabase } from '@/lib/supabase/client';
 import { ConfirmModal } from '@/components/admin/ConfirmModal';
 import { Portal } from '@/components/public/Portal';
 
@@ -135,9 +135,12 @@ export default function AdminDashboardPage() {
     skills_raw: ''
   });
 
-  const handleLogout = () => {
-    localStorage.removeItem('admin_authenticated');
+  const handleLogout = async () => {
+    if (supabase) {
+      await supabase.auth.signOut();
+    }
     router.push('/admin/login');
+    router.refresh();
   };
 
   // Open Project Form for Create or Edit

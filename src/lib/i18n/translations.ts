@@ -6,7 +6,6 @@ export const translations = {
       certificates: 'Sertifikat',
       projects: 'Projects',
       contact: 'Contact',
-      admin: 'Admin CMS',
       downloadCv: 'Download CV'
     },
     hero: {
@@ -95,7 +94,6 @@ export const translations = {
       certificates: 'Certificates',
       projects: 'Projects',
       contact: 'Contact',
-      admin: 'Admin CMS',
       downloadCv: 'Download CV'
     },
     hero: {

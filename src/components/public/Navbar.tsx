@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Download, Menu, X, Sparkles, Globe } from 'lucide-react';
+import { Download, Menu, X, Globe } from 'lucide-react';
 import { ProfileBio } from '@/types/portfolio';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/lib/i18n/translations';
@@ -73,9 +73,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             </a>
             <a href="#contact" className="px-4 py-2 text-sm text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-full transition-all">
               {t.contact}
-            </a>
-            <a href="/admin/login" className="px-3 py-2 text-xs text-violet-400 hover:text-violet-300 hover:bg-violet-900/20 rounded-full transition-all font-mono-tech flex items-center gap-1">
-              <Sparkles className="w-3 h-3" /> {t.admin}
             </a>
           </nav>
 
@@ -176,14 +173,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             {t.contact}
           </a>
-          <a 
-            href="/admin/login" 
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-violet-400 py-2 flex items-center gap-2 font-mono-tech text-sm"
-          >
-            <Sparkles className="w-4 h-4" /> {t.admin}
-          </a>
-          <a 
+          <a
             href={cvUrl}
             target="_blank" 
             rel="noopener noreferrer"
