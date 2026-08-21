@@ -1,10 +1,17 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, Code2, Sparkles, FolderGit2, ShieldCheck, Terminal } from 'lucide-react';
-import { ProfileBio } from '@/types/portfolio';
-import { useLanguage } from '@/context/LanguageContext';
-import { translations } from '@/lib/i18n/translations';
+import React, { useState, useEffect } from "react";
+import {
+  ArrowRight,
+  Code2,
+  Sparkles,
+  FolderGit2,
+  ShieldCheck,
+  Terminal,
+} from "lucide-react";
+import { ProfileBio } from "@/types/portfolio";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/lib/i18n/translations";
 
 interface HeroProps {
   profile: ProfileBio;
@@ -15,7 +22,7 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
   const t = translations[language].hero;
 
   const [roleIndex, setRoleIndex] = useState(0);
-  const [currentText, setCurrentText] = useState('');
+  const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
   const roles = t.roles;
@@ -27,12 +34,12 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
     const timer = setTimeout(() => {
       if (!isDeleting && currentText === fullText) {
         setTimeout(() => setIsDeleting(true), 1500);
-      } else if (isDeleting && currentText === '') {
+      } else if (isDeleting && currentText === "") {
         setIsDeleting(false);
         setRoleIndex((prev) => (prev + 1) % roles.length);
       } else {
         setCurrentText(
-          fullText.substring(0, currentText.length + (isDeleting ? -1 : 1))
+          fullText.substring(0, currentText.length + (isDeleting ? -1 : 1)),
         );
       }
     }, speed);
@@ -41,10 +48,12 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
   }, [currentText, isDeleting, roleIndex, roles]);
 
   return (
-    <section id="home" className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
+    <section
+      id="home"
+      className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
           {/* Left Column - Intro & Typewriter */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             {/* Status Pill */}
@@ -60,17 +69,20 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
 
             {/* Headline */}
             <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-none mb-4">
-              {t.salutation} <span className="gradient-text-purple">{profile.full_name}</span>
+              {t.salutation}{" "}
+              <span className="gradient-text-purple">{profile.full_name}</span>
             </h1>
 
             {/* Dynamic Typewriter Role */}
             <div className="h-12 sm:h-14 mb-6 flex items-center">
               <span className="text-xl sm:text-3xl font-semibold text-gray-300 font-mono-tech">
-                {t.typewriterPrefix}{' '}
+                {t.typewriterPrefix}{" "}
                 <span className="gradient-text-cyan border-b-2 border-cyan-400 inline-block pb-0.5">
                   {currentText}
                 </span>
-                <span className="animate-pulse text-cyan-400 font-bold ml-1">|</span>
+                <span className="animate-pulse text-cyan-400 font-bold ml-1">
+                  |
+                </span>
               </span>
             </div>
 
@@ -81,7 +93,7 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
-              <a 
+              <a
                 href="#projects"
                 className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-semibold shadow-lg shadow-violet-700/30 hover:shadow-cyan-500/40 transition-all flex items-center justify-center gap-2 group"
               >
@@ -89,7 +101,7 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
 
-              <a 
+              <a
                 href="#contact"
                 className="w-full sm:w-auto px-7 py-3.5 rounded-full glass-card hover:bg-white/10 text-gray-200 hover:text-white border border-white/15 font-medium transition-all text-center flex items-center justify-center gap-2"
               >
@@ -102,24 +114,27 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
             <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-white/10 w-full max-w-xl">
               <div>
                 <div className="text-2xl sm:text-3xl font-bold font-mono-tech text-white flex items-center gap-1">
-                  <span>3+</span>
+                  <span>2+</span>
                 </div>
                 <div className="text-xs text-gray-400 mt-1">{t.yearsExp}</div>
               </div>
               <div>
                 <div className="text-2xl sm:text-3xl font-bold font-mono-tech text-white flex items-center gap-1">
-                  <span>25+</span>
+                  <span>10+</span>
                 </div>
-                <div className="text-xs text-gray-400 mt-1">{t.completedProj}</div>
+                <div className="text-xs text-gray-400 mt-1">
+                  {t.completedProj}
+                </div>
               </div>
               <div>
                 <div className="text-2xl sm:text-3xl font-bold font-mono-tech text-white flex items-center gap-1">
                   <span>100%</span>
                 </div>
-                <div className="text-xs text-gray-400 mt-1">{t.satisfaction}</div>
+                <div className="text-xs text-gray-400 mt-1">
+                  {t.satisfaction}
+                </div>
               </div>
             </div>
-
           </div>
 
           {/* Right Column - Holographic Visual Card */}
@@ -130,7 +145,6 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
 
             {/* Card Frame */}
             <div className="relative w-full max-w-md p-6 glass-card rounded-3xl border border-white/15 shadow-2xl overflow-hidden group">
-              
               {/* Header Visual Bar */}
               <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
                 <div className="flex items-center gap-2">
@@ -153,8 +167,12 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white font-mono-tech">{profile.full_name}</h3>
-                    <p className="text-xs text-cyan-300 font-mono-tech">Next.js & Supabase Stack</p>
+                    <h3 className="text-lg font-bold text-white font-mono-tech">
+                      {profile.full_name}
+                    </h3>
+                    <p className="text-xs text-cyan-300 font-mono-tech">
+                      Next.js & Supabase Stack
+                    </p>
                     <div className="flex items-center gap-1 mt-1 text-[11px] text-gray-400">
                       <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                       Verified Full-Stack Developer
@@ -164,15 +182,31 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
 
                 {/* Code Snippet Box */}
                 <div className="bg-[#04000a] p-3.5 rounded-xl border border-white/5 font-mono-tech text-xs leading-relaxed text-gray-300">
-                  <div className="text-violet-400">const <span className="text-cyan-300">developer</span> = &#123;</div>
-                  <div className="pl-4 text-gray-400">
-                    name: <span className="text-emerald-300">&apos;{profile.full_name}&apos;</span>,
+                  <div className="text-violet-400">
+                    const <span className="text-cyan-300">developer</span> =
+                    &#123;
                   </div>
                   <div className="pl-4 text-gray-400">
-                    mode: <span className="text-emerald-300">&apos;Multi-Language i18n Active&apos;</span>,
+                    name:{" "}
+                    <span className="text-emerald-300">
+                      &apos;{profile.full_name}&apos;
+                    </span>
+                    ,
                   </div>
                   <div className="pl-4 text-gray-400">
-                    stack: [<span className="text-amber-300">&apos;Next.js&apos;</span>, <span className="text-amber-300">&apos;Tailwind&apos;</span>, <span className="text-amber-300">&apos;Supabase&apos;</span>]
+                    mode:{" "}
+                    <span className="text-emerald-300">
+                      &apos;Multi-Language i18n Active&apos;
+                    </span>
+                    ,
+                  </div>
+                  <div className="pl-4 text-gray-400">
+                    stack: [
+                    <span className="text-amber-300">&apos;Next.js&apos;</span>,{" "}
+                    <span className="text-amber-300">&apos;Tailwind&apos;</span>
+                    ,{" "}
+                    <span className="text-amber-300">&apos;Supabase&apos;</span>
+                    ]
                   </div>
                   <div className="text-violet-400">&#125;;</div>
                 </div>
@@ -188,10 +222,8 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
                   CMS Ready
                 </span>
               </div>
-
             </div>
           </div>
-
         </div>
       </div>
     </section>

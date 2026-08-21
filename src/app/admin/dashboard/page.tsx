@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { 
   FolderKanban, Layers, UserCheck, Plus, Trash2, Edit3, 
@@ -21,6 +21,32 @@ export default function AdminDashboardPage() {
   const [profile, setProfile] = useState<ProfileBio>(MOCK_PROFILE);
   const [categories, setCategories] = useState<Category[]>(MOCK_CATEGORIES);
   const [certificates, setCertificates] = useState<Certificate[]>(MOCK_CERTIFICATES);
+
+  const [loading, setLoading] = useState(true);
+
+  // Load all CMS data from Supabase on mount
+  useEffect(() => {
+    const loadData = async () => {
+      if (!supabase) {
+        setLoading(false);
+        return;
+      }
+      const [projRes, skillRes, profRes, catRes, certRes] = await Promise.all([
+        supabase.from('projects').select('*').order('created_at', { ascending: false }),
+        supabase.from('skills').select('*').order('created_at', { ascending: true }),
+        supabase.from('profile_bio').select('*').limit(1).maybeSingle(),
+        supabase.from('categories').select('*').order('name', { ascending: true }),
+        supabase.from('certificates').select('*').order('created_at', { ascending: false }),
+      ]);
+      if (projRes.data) setProjects(projRes.data);
+      if (skillRes.data) setSkills(skillRes.data);
+      if (profRes.data) setProfile(profRes.data);
+      if (catRes.data && catRes.data.length > 0) setCategories(catRes.data);
+      if (certRes.data) setCertificates(certRes.data);
+      setLoading(false);
+    };
+    loadData();
+  }, []);
 
   // Custom Delete Confirm Modal State
   const [confirmDelete, setConfirmDelete] = useState<{
@@ -56,7 +82,23 @@ export default function AdminDashboardPage() {
   // State for CV Upload
   const [cvFileName, setCvFileName] = useState<string | null>(null);
 
-  const handleCvUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Uploads a file to a Supabase Storage bucket and returns its public URL
+  const uploadToStorage = async (bucket: string, folder: string, file: File): Promise<string | null> => {
+    if (!supabase) {
+      alert('Supabase belum dikonfigurasi.');
+      return null;
+    }
+    const path = `${folder}/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '')}`;
+    const { error } = await supabase.storage.from(bucket).upload(path, file, { upsert: false });
+    if (error) {
+      alert('Gagal upload file: ' + error.message);
+      return null;
+    }
+    const { data } = supabase.storage.from(bucket).getPublicUrl(path);
+    return data.publicUrl;
+  };
+
+  const handleCvUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -65,13 +107,14 @@ export default function AdminDashboardPage() {
       return;
     }
 
+    const url = await uploadToStorage('resumes', 'cv', file);
+    if (!url) return;
     setCvFileName(file.name);
-    const objectUrl = URL.createObjectURL(file);
-    setProfile(prev => ({ ...prev, cv_pdf_url: objectUrl }));
+    setProfile(prev => ({ ...prev, cv_pdf_url: url }));
   };
 
   // Handler for Certificate Image File Upload
-  const handleCertImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCertImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -80,17 +123,13 @@ export default function AdminDashboardPage() {
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.result) {
-        setCertForm(prev => ({ ...prev, image_url: reader.result as string }));
-      }
-    };
-    reader.readAsDataURL(file);
+    const url = await uploadToStorage('portfolio-media', 'certificates', file);
+    if (!url) return;
+    setCertForm(prev => ({ ...prev, image_url: url }));
   };
 
   // Handler for Project Thumbnail File Upload
-  const handleProjectImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleProjectImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -99,13 +138,9 @@ export default function AdminDashboardPage() {
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.result) {
-        setProjectForm(prev => ({ ...prev, thumbnail_url: reader.result as string }));
-      }
-    };
-    reader.readAsDataURL(file);
+    const url = await uploadToStorage('portfolio-media', 'projects', file);
+    if (!url) return;
+    setProjectForm(prev => ({ ...prev, thumbnail_url: url }));
   };
 
   // Form State for Skill CRUD
@@ -134,6 +169,32 @@ export default function AdminDashboardPage() {
     image_url: '',
     skills_raw: ''
   });
+
+  // Save Profile Bio (single-row upsert)
+  const handleSaveProfile = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!supabase) { alert('Supabase belum dikonfigurasi.'); return; }
+
+    const payload = {
+      full_name: profile.full_name,
+      status_badge: profile.status_badge,
+      bio_summary: profile.bio_summary,
+      cv_pdf_url: profile.cv_pdf_url,
+      social_links: profile.social_links
+    };
+
+    if (profile.id) {
+      const { data, error } = await supabase.from('profile_bio').update(payload).eq('id', profile.id).select().single();
+      if (error) { alert('Gagal memperbarui profil: ' + error.message); return; }
+      setProfile(data);
+    } else {
+      const { data, error } = await supabase.from('profile_bio').insert(payload).select().single();
+      if (error) { alert('Gagal memperbarui profil: ' + error.message); return; }
+      setProfile(data);
+    }
+
+    alert('Profil berhasil diperbarui!');
+  };
 
   const handleLogout = async () => {
     if (supabase) {
@@ -178,58 +239,48 @@ export default function AdminDashboardPage() {
   };
 
   // Save Project (Create or Update)
-  const handleSaveProject = (e: React.FormEvent) => {
+  const handleSaveProject = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!supabase) { alert('Supabase belum dikonfigurasi.'); return; }
     const techArray = projectForm.tech_stack_raw.split(',').map(s => s.trim()).filter(Boolean);
 
+    const payload = {
+      title: projectForm.title,
+      category: projectForm.category,
+      description: projectForm.description,
+      rich_content: projectForm.rich_content || null,
+      thumbnail_url: projectForm.thumbnail_url,
+      tech_stack: techArray,
+      demo_url: projectForm.demo_url || null,
+      github_url: projectForm.github_url || null,
+      figma_url: projectForm.figma_url || null,
+      embed_url: projectForm.embed_url || null
+    };
+
     if (editingProject) {
-      setProjects(projects.map(p => p.id === editingProject.id ? {
-        ...p,
-        title: projectForm.title,
-        category: projectForm.category,
-        description: projectForm.description,
-        rich_content: projectForm.rich_content,
-        thumbnail_url: projectForm.thumbnail_url,
-        tech_stack: techArray,
-        demo_url: projectForm.demo_url,
-        github_url: projectForm.github_url,
-        figma_url: projectForm.figma_url,
-        embed_url: projectForm.embed_url
-      } : p));
+      const { data, error } = await supabase.from('projects').update(payload).eq('id', editingProject.id).select().single();
+      if (error) { alert('Gagal menyimpan proyek: ' + error.message); return; }
+      setProjects(projects.map(p => p.id === editingProject.id ? data : p));
     } else {
-      const newProj: Project = {
-        id: 'p-' + Date.now(),
-        title: projectForm.title,
-        slug: projectForm.title.toLowerCase().replace(/\s+/g, '-'),
-        category: projectForm.category,
-        description: projectForm.description,
-        rich_content: projectForm.rich_content,
-        thumbnail_url: projectForm.thumbnail_url,
-        tech_stack: techArray,
-        demo_url: projectForm.demo_url,
-        github_url: projectForm.github_url,
-        figma_url: projectForm.figma_url,
-        embed_url: projectForm.embed_url
-      };
-      setProjects([newProj, ...projects]);
+      const slug = projectForm.title.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') + '-' + Date.now().toString(36);
+      const { data, error } = await supabase.from('projects').insert({ ...payload, slug }).select().single();
+      if (error) { alert('Gagal menyimpan proyek: ' + error.message); return; }
+      setProjects([data, ...projects]);
     }
 
     setShowProjectModal(false);
   };
 
   // Add New Category
-  const handleAddCategory = (e: React.FormEvent) => {
+  const handleAddCategory = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newCategoryName.trim()) return;
+    if (!newCategoryName.trim() || !supabase) return;
 
-    const slug = newCategoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-    const newCat: Category = {
-      id: 'cat-' + Date.now(),
-      name: newCategoryName.trim(),
-      slug: slug || 'cat-' + Date.now()
-    };
+    const slug = newCategoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || 'cat-' + Date.now();
+    const { data, error } = await supabase.from('categories').insert({ name: newCategoryName.trim(), slug }).select().single();
+    if (error) { alert('Gagal menambah kategori: ' + error.message); return; }
 
-    setCategories([...categories, newCat]);
+    setCategories([...categories, data]);
     setNewCategoryName('');
     setShowCategoryModal(false);
   };
@@ -279,31 +330,56 @@ export default function AdminDashboardPage() {
   };
 
   // Execute Deletion after confirmation
-  const handleConfirmDelete = () => {
-    if (confirmDelete.type === 'project' && confirmDelete.id) {
-      setProjects(projects.filter(p => p.id !== confirmDelete.id));
-    } else if (confirmDelete.type === 'skill' && confirmDelete.id) {
-      setSkills(skills.filter(s => s.id !== confirmDelete.id));
-    } else if (confirmDelete.type === 'category' && confirmDelete.id) {
-      setCategories(categories.filter(c => c.id !== confirmDelete.id));
-    } else if (confirmDelete.type === 'certificate' && confirmDelete.id) {
-      setCertificates(certificates.filter(c => c.id !== confirmDelete.id));
+  const handleConfirmDelete = async () => {
+    const { type, id } = confirmDelete;
+    if (!supabase || !id) {
+      setConfirmDelete({ isOpen: false, type: null, id: null, title: '', message: '' });
+      return;
+    }
+
+    const tableByType: Record<string, string> = {
+      project: 'projects',
+      skill: 'skills',
+      category: 'categories',
+      certificate: 'certificates'
+    };
+    const table = type ? tableByType[type] : null;
+
+    if (table) {
+      const { error } = await supabase.from(table).delete().eq('id', id);
+      if (error) {
+        alert('Gagal menghapus: ' + error.message);
+        setConfirmDelete({ isOpen: false, type: null, id: null, title: '', message: '' });
+        return;
+      }
+    }
+
+    if (type === 'project') {
+      setProjects(projects.filter(p => p.id !== id));
+    } else if (type === 'skill') {
+      setSkills(skills.filter(s => s.id !== id));
+    } else if (type === 'category') {
+      setCategories(categories.filter(c => c.id !== id));
+    } else if (type === 'certificate') {
+      setCertificates(certificates.filter(c => c.id !== id));
     }
     setConfirmDelete({ isOpen: false, type: null, id: null, title: '', message: '' });
   };
 
   // Add Skill
-  const handleAddSkill = (e: React.FormEvent) => {
+  const handleAddSkill = async (e: React.FormEvent) => {
     e.preventDefault();
-    const newSkill: Skill = {
-      id: 's-' + Date.now(),
+    if (!supabase) return;
+    const payload = {
       name: skillForm.name,
       category: skillForm.category,
       icon_name: skillForm.icon_name,
       proficiency_level: Number(skillForm.proficiency_level),
       experience_years: skillForm.experience_years
     };
-    setSkills([...skills, newSkill]);
+    const { data, error } = await supabase.from('skills').insert(payload).select().single();
+    if (error) { alert('Gagal menambah skill: ' + error.message); return; }
+    setSkills([...skills, data]);
     setShowSkillModal(false);
     setSkillForm({ name: '', category: 'frontend', icon_name: 'Code2', proficiency_level: 85, experience_years: '2+ Thn' });
   };
@@ -337,33 +413,29 @@ export default function AdminDashboardPage() {
   };
 
   // Save Certificate (Create or Update)
-  const handleSaveCert = (e: React.FormEvent) => {
+  const handleSaveCert = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!supabase) { alert('Supabase belum dikonfigurasi.'); return; }
     const skillsArray = certForm.skills_raw.split(',').map(s => s.trim()).filter(Boolean);
 
+    const payload = {
+      title: certForm.title,
+      issuer: certForm.issuer,
+      issue_date: certForm.issue_date,
+      credential_id: certForm.credential_id || null,
+      credential_url: certForm.credential_url || null,
+      image_url: certForm.image_url,
+      skills: skillsArray
+    };
+
     if (editingCert) {
-      setCertificates(certificates.map(c => c.id === editingCert.id ? {
-        ...c,
-        title: certForm.title,
-        issuer: certForm.issuer,
-        issue_date: certForm.issue_date,
-        credential_id: certForm.credential_id,
-        credential_url: certForm.credential_url,
-        image_url: certForm.image_url,
-        skills: skillsArray
-      } : c));
+      const { data, error } = await supabase.from('certificates').update(payload).eq('id', editingCert.id).select().single();
+      if (error) { alert('Gagal menyimpan sertifikat: ' + error.message); return; }
+      setCertificates(certificates.map(c => c.id === editingCert.id ? data : c));
     } else {
-      const newCert: Certificate = {
-        id: 'cert-' + Date.now(),
-        title: certForm.title,
-        issuer: certForm.issuer,
-        issue_date: certForm.issue_date,
-        credential_id: certForm.credential_id,
-        credential_url: certForm.credential_url,
-        image_url: certForm.image_url,
-        skills: skillsArray
-      };
-      setCertificates([newCert, ...certificates]);
+      const { data, error } = await supabase.from('certificates').insert(payload).select().single();
+      if (error) { alert('Gagal menyimpan sertifikat: ' + error.message); return; }
+      setCertificates([data, ...certificates]);
     }
 
     setShowCertModal(false);
@@ -482,11 +554,21 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono-tech flex items-center gap-1.5">
-              <Database className="w-3.5 h-3.5" /> Supabase Status: Connected
+            <div className={`px-3 py-1.5 rounded-full border text-xs font-mono-tech flex items-center gap-1.5 ${
+              supabase
+                ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
+                : 'bg-rose-500/10 border-rose-500/20 text-rose-400'
+            }`}>
+              <Database className="w-3.5 h-3.5" /> Supabase Status: {supabase ? 'Connected' : 'Not Configured'}
             </div>
           </div>
         </header>
+
+        {loading && (
+          <div className="mb-6 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-xs text-gray-300 font-mono-tech">
+            Memuat data dari Supabase...
+          </div>
+        )}
 
         {/* TAB 1: PROJECTS MANAGEMENT */}
         {activeTab === 'projects' && (
@@ -741,7 +823,7 @@ export default function AdminDashboardPage() {
         {activeTab === 'profile' && (
           <div className="max-w-2xl glass-card rounded-3xl p-8 border border-white/10">
             <h2 className="text-lg font-bold text-white mb-6">Edit Profile Bio & Dynamic Resume</h2>
-            <form onSubmit={(e) => { e.preventDefault(); alert('Profil berhasil diperbarui!'); }} className="space-y-4 text-xs font-mono-tech">
+            <form onSubmit={handleSaveProfile} className="space-y-4 text-xs font-mono-tech">
               <div>
                 <label className="block text-gray-300 mb-1">Nama Lengkap</label>
                 <input 
@@ -764,12 +846,59 @@ export default function AdminDashboardPage() {
 
               <div>
                 <label className="block text-gray-300 mb-1">Bio Ringkasan</label>
-                <textarea 
+                <textarea
                   rows={4}
-                  value={profile.bio_summary} 
+                  value={profile.bio_summary}
                   onChange={(e) => setProfile({ ...profile, bio_summary: e.target.value })}
                   className="w-full p-3 rounded-xl glass-input resize-none"
                 />
+              </div>
+
+              {/* Social Media Links */}
+              <div className="pt-4 border-t border-white/10 space-y-3">
+                <label className="block text-cyan-300 font-bold mb-1 flex items-center gap-1.5">
+                  <Globe className="w-4 h-4" /> Tautan Media Sosial
+                </label>
+                <div>
+                  <label className="block text-gray-400 mb-1">Instagram URL</label>
+                  <input
+                    type="text"
+                    placeholder="https://www.instagram.com/username"
+                    value={profile.social_links.instagram || ''}
+                    onChange={(e) => setProfile({ ...profile, social_links: { ...profile.social_links, instagram: e.target.value } })}
+                    className="w-full p-3 rounded-xl glass-input"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-400 mb-1">TikTok URL</label>
+                  <input
+                    type="text"
+                    placeholder="https://www.tiktok.com/@username"
+                    value={profile.social_links.tiktok || ''}
+                    onChange={(e) => setProfile({ ...profile, social_links: { ...profile.social_links, tiktok: e.target.value } })}
+                    className="w-full p-3 rounded-xl glass-input"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-400 mb-1">LinkedIn URL</label>
+                  <input
+                    type="text"
+                    placeholder="https://www.linkedin.com/in/username"
+                    value={profile.social_links.linkedin || ''}
+                    onChange={(e) => setProfile({ ...profile, social_links: { ...profile.social_links, linkedin: e.target.value } })}
+                    className="w-full p-3 rounded-xl glass-input"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-400 mb-1">GitHub URL</label>
+                  <input
+                    type="text"
+                    placeholder="https://github.com/username"
+                    value={profile.social_links.github || ''}
+                    onChange={(e) => setProfile({ ...profile, social_links: { ...profile.social_links, github: e.target.value } })}
+                    className="w-full p-3 rounded-xl glass-input"
+                  />
+                </div>
               </div>
 
               {/* Dynamic Resume PDF Upload Handler */}

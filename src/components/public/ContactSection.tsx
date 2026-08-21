@@ -77,7 +77,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
 
               <div className="space-y-4">
                 <a
-                  href="mailto:contact@bhisma.dev"
+                  href="bagusbhismantara12@gmail.com"
                   className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/5 hover:bg-white/10 text-gray-200 hover:text-cyan-300 border border-white/10 transition-colors"
                 >
                   <div className="p-2.5 rounded-xl bg-violet-600/20 text-violet-400">
@@ -88,7 +88,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                       {t.emailLabel}
                     </div>
                     <div className="text-sm font-medium">
-                      contact@bhisma.dev
+                      bagusbhismantara12@gmail.com
                     </div>
                   </div>
                 </a>
@@ -141,7 +141,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                   )}
                   {profile.social_links.instagram && (
                     <a
-                      href={profile.social_links.instagram.startsWith('http') ? profile.social_links.instagram : 'https://www.instagram.com/bhisma0_1/'}
+                      href={
+                        profile.social_links.instagram.startsWith("http")
+                          ? profile.social_links.instagram
+                          : "https://www.instagram.com/bhisma0_1/"
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-3 rounded-xl bg-white/5 hover:bg-rose-600/20 text-gray-300 hover:text-rose-400 border border-white/10 transition-colors"
