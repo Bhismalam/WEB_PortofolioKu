@@ -120,7 +120,7 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
               </div>
               <div>
                 <div className="text-2xl sm:text-3xl font-bold font-mono-tech text-white flex items-center gap-1">
-                  <span>10+</span>
+                  <span>5+</span>
                 </div>
                 <div className="text-xs text-gray-400 mt-1">
                   {t.completedProj}
