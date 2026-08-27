@@ -442,20 +442,20 @@ export default function AdminDashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070010] text-gray-100 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-[#0a0e14] text-gray-100 flex flex-col md:flex-row">
       
       {/* Sidebar */}
       <aside className="w-full md:w-64 glass-navbar border-r border-white/10 p-6 flex flex-col justify-between">
         <div>
           <div className="flex items-center gap-2 mb-8">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-violet-600 to-cyan-400 p-[1px]">
-              <div className="w-full h-full bg-[#0a0015] rounded-[11px] flex items-center justify-center font-bold text-cyan-300 text-xs font-mono-tech">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-blue-400 p-[1px]">
+              <div className="w-full h-full bg-[#12161f] rounded-[11px] flex items-center justify-center font-bold text-blue-300 text-xs font-mono-tech">
                 CMS
               </div>
             </div>
             <div>
               <span className="font-bold text-white text-sm font-mono-tech">CMS DASHBOARD</span>
-              <div className="text-[10px] text-violet-400">Admin Control Panel</div>
+              <div className="text-[10px] text-blue-400">Admin Control Panel</div>
             </div>
           </div>
 
@@ -464,7 +464,7 @@ export default function AdminDashboardPage() {
               onClick={() => setActiveTab('projects')}
               className={`w-full px-4 py-3 rounded-xl text-xs font-mono-tech flex items-center gap-2.5 transition-colors ${
                 activeTab === 'projects' 
-                  ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold shadow-lg shadow-violet-900/40' 
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-600 text-white font-bold shadow-lg shadow-blue-900/40' 
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
@@ -475,7 +475,7 @@ export default function AdminDashboardPage() {
               onClick={() => setActiveTab('categories')}
               className={`w-full px-4 py-3 rounded-xl text-xs font-mono-tech flex items-center gap-2.5 transition-colors ${
                 activeTab === 'categories' 
-                  ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold shadow-lg shadow-violet-900/40' 
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-600 text-white font-bold shadow-lg shadow-blue-900/40' 
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
@@ -486,7 +486,7 @@ export default function AdminDashboardPage() {
               onClick={() => setActiveTab('skills')}
               className={`w-full px-4 py-3 rounded-xl text-xs font-mono-tech flex items-center gap-2.5 transition-colors ${
                 activeTab === 'skills' 
-                  ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold shadow-lg shadow-violet-900/40' 
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-600 text-white font-bold shadow-lg shadow-blue-900/40' 
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
@@ -497,7 +497,7 @@ export default function AdminDashboardPage() {
               onClick={() => setActiveTab('certificates')}
               className={`w-full px-4 py-3 rounded-xl text-xs font-mono-tech flex items-center gap-2.5 transition-colors ${
                 activeTab === 'certificates' 
-                  ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold shadow-lg shadow-violet-900/40' 
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-600 text-white font-bold shadow-lg shadow-blue-900/40' 
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
@@ -508,7 +508,7 @@ export default function AdminDashboardPage() {
               onClick={() => setActiveTab('profile')}
               className={`w-full px-4 py-3 rounded-xl text-xs font-mono-tech flex items-center gap-2.5 transition-colors ${
                 activeTab === 'profile' 
-                  ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold shadow-lg shadow-violet-900/40' 
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-600 text-white font-bold shadow-lg shadow-blue-900/40' 
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
@@ -521,7 +521,7 @@ export default function AdminDashboardPage() {
           <a 
             href="/"
             target="_blank"
-            className="w-full mb-2 py-2.5 px-4 rounded-xl glass-card text-xs text-cyan-300 font-mono-tech flex items-center justify-center gap-2 hover:bg-white/10"
+            className="w-full mb-2 py-2.5 px-4 rounded-xl glass-card text-xs text-blue-300 font-mono-tech flex items-center justify-center gap-2 hover:bg-white/10"
           >
             <Globe className="w-3.5 h-3.5" /> Lihat Website Publik
           </a>
@@ -577,7 +577,7 @@ export default function AdminDashboardPage() {
               <h2 className="text-lg font-bold text-white">Daftar Karya Portofolio</h2>
               <button
                 onClick={() => openProjectForm()}
-                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-medium text-xs font-mono-tech flex items-center gap-2 shadow-lg shadow-violet-900/30"
+                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium text-xs font-mono-tech flex items-center gap-2 shadow-lg shadow-blue-900/30"
               >
                 <Plus className="w-4 h-4" /> Tambah Proyek Baru
               </button>
@@ -608,7 +608,7 @@ export default function AdminDashboardPage() {
                           <div className="text-gray-400 line-clamp-1 max-w-xs">{proj.description}</div>
                         </div>
                       </td>
-                      <td className="p-4 font-mono-tech text-cyan-300">
+                      <td className="p-4 font-mono-tech text-blue-300">
                         <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 uppercase text-[10px]">
                           {proj.category}
                         </span>
@@ -616,7 +616,7 @@ export default function AdminDashboardPage() {
                       <td className="p-4">
                         <div className="flex flex-wrap gap-1 max-w-xs">
                           {proj.tech_stack.map((t, idx) => (
-                            <span key={idx} className="px-2 py-0.5 rounded bg-violet-900/30 text-violet-300 font-mono-tech text-[10px]">
+                            <span key={idx} className="px-2 py-0.5 rounded bg-blue-900/30 text-blue-300 font-mono-tech text-[10px]">
                               {t}
                             </span>
                           ))}
@@ -625,7 +625,7 @@ export default function AdminDashboardPage() {
                       <td className="p-4 text-right space-x-2">
                         <button
                           onClick={() => openProjectForm(proj)}
-                          className="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-cyan-400"
+                          className="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-blue-400"
                           title="Edit Proyek"
                         >
                           <Edit3 className="w-4 h-4" />
@@ -658,7 +658,7 @@ export default function AdminDashboardPage() {
               </div>
               <button
                 onClick={() => setShowCategoryModal(true)}
-                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-medium text-xs font-mono-tech flex items-center gap-2 shadow-lg shadow-violet-900/30"
+                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium text-xs font-mono-tech flex items-center gap-2 shadow-lg shadow-blue-900/30"
               >
                 <Plus className="w-4 h-4" /> Tambah Kategori Baru
               </button>
@@ -666,14 +666,14 @@ export default function AdminDashboardPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {categories.map((cat) => (
-                <div key={cat.id} className="glass-card rounded-2xl p-5 border border-white/10 flex items-center justify-between group hover:border-violet-500/40">
+                <div key={cat.id} className="glass-card rounded-2xl p-5 border border-white/10 flex items-center justify-between group hover:border-blue-500/40">
                   <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-xl bg-violet-600/20 text-violet-300">
+                    <div className="p-2.5 rounded-xl bg-blue-600/20 text-blue-300">
                       <Tag className="w-4 h-4" />
                     </div>
                     <div>
                       <h3 className="font-bold text-white text-sm">{cat.name}</h3>
-                      <p className="text-xs text-cyan-400 font-mono-tech">Slug: {cat.slug}</p>
+                      <p className="text-xs text-blue-400 font-mono-tech">Slug: {cat.slug}</p>
                     </div>
                   </div>
                   <button
@@ -696,7 +696,7 @@ export default function AdminDashboardPage() {
               <h2 className="text-lg font-bold text-white">Daftar Keahlian & Tools</h2>
               <button
                 onClick={() => setShowSkillModal(true)}
-                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-medium text-xs font-mono-tech flex items-center gap-2 shadow-lg shadow-violet-900/30"
+                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium text-xs font-mono-tech flex items-center gap-2 shadow-lg shadow-blue-900/30"
               >
                 <Plus className="w-4 h-4" /> Tambah Skill Baru
               </button>
@@ -707,7 +707,7 @@ export default function AdminDashboardPage() {
                 <div key={skill.id} className="glass-card rounded-xl p-4 border border-white/10 flex items-center justify-between">
                   <div>
                     <h3 className="font-bold text-white text-sm">{skill.name}</h3>
-                    <p className="text-xs text-cyan-400 font-mono-tech">Category: {skill.category} ({skill.proficiency_level}%)</p>
+                    <p className="text-xs text-blue-400 font-mono-tech">Category: {skill.category} ({skill.proficiency_level}%)</p>
                   </div>
                   <button
                     onClick={() => promptDeleteSkill(skill)}
@@ -734,7 +734,7 @@ export default function AdminDashboardPage() {
               </div>
               <button
                 onClick={() => openCertForm()}
-                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-medium text-xs font-mono-tech flex items-center gap-2 shadow-lg shadow-violet-900/30"
+                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium text-xs font-mono-tech flex items-center gap-2 shadow-lg shadow-blue-900/30"
               >
                 <Plus className="w-4 h-4" /> Tambah Sertifikat Baru
               </button>
@@ -766,19 +766,19 @@ export default function AdminDashboardPage() {
                         </div>
                       </td>
                       <td className="p-4 font-mono-tech">
-                        <div className="text-cyan-300 font-bold">{cert.issuer}</div>
+                        <div className="text-blue-300 font-bold">{cert.issuer}</div>
                         <div className="text-gray-400 text-[11px]">{cert.issue_date}</div>
                       </td>
                       <td className="p-4 font-mono-tech text-gray-300">
                         {cert.credential_id && (
-                          <div className="text-violet-300">ID: {cert.credential_id}</div>
+                          <div className="text-blue-300">ID: {cert.credential_id}</div>
                         )}
                         {cert.credential_url ? (
                           <a 
                             href={cert.credential_url} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="text-cyan-400 hover:underline flex items-center gap-1 text-[11px] mt-0.5"
+                            className="text-blue-400 hover:underline flex items-center gap-1 text-[11px] mt-0.5"
                           >
                             <ShieldCheck className="w-3 h-3" /> Verifikasi URL
                           </a>
@@ -789,7 +789,7 @@ export default function AdminDashboardPage() {
                       <td className="p-4">
                         <div className="flex flex-wrap gap-1 max-w-xs">
                           {cert.skills?.map((s, idx) => (
-                            <span key={idx} className="px-2 py-0.5 rounded bg-violet-900/30 text-violet-300 font-mono-tech text-[10px]">
+                            <span key={idx} className="px-2 py-0.5 rounded bg-blue-900/30 text-blue-300 font-mono-tech text-[10px]">
                               {s}
                             </span>
                           ))}
@@ -798,7 +798,7 @@ export default function AdminDashboardPage() {
                       <td className="p-4 text-right space-x-2">
                         <button
                           onClick={() => openCertForm(cert)}
-                          className="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-cyan-400"
+                          className="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-blue-400"
                           title="Edit Sertifikat"
                         >
                           <Edit3 className="w-4 h-4" />
@@ -856,7 +856,7 @@ export default function AdminDashboardPage() {
 
               {/* Social Media Links */}
               <div className="pt-4 border-t border-white/10 space-y-3">
-                <label className="block text-cyan-300 font-bold mb-1 flex items-center gap-1.5">
+                <label className="block text-blue-300 font-bold mb-1 flex items-center gap-1.5">
                   <Globe className="w-4 h-4" /> Tautan Media Sosial
                 </label>
                 <div>
@@ -903,11 +903,11 @@ export default function AdminDashboardPage() {
 
               {/* Dynamic Resume PDF Upload Handler */}
               <div className="pt-4 border-t border-white/10">
-                <label className="block text-cyan-300 font-bold mb-2 flex items-center gap-1.5">
+                <label className="block text-blue-300 font-bold mb-2 flex items-center gap-1.5">
                   <FileText className="w-4 h-4" /> Upload CV Resume PDF Terbaru
                 </label>
-                <div className="p-6 rounded-2xl border-2 border-dashed border-white/20 text-center hover:border-cyan-400 transition-colors">
-                  <Upload className="w-8 h-8 text-cyan-400 mx-auto mb-2 animate-bounce" />
+                <div className="p-6 rounded-2xl border-2 border-dashed border-white/20 text-center hover:border-blue-400 transition-colors">
+                  <Upload className="w-8 h-8 text-blue-400 mx-auto mb-2 animate-bounce" />
                   <p className="text-gray-300 text-xs mb-1">Pilih file PDF CV dari perangkat Anda (Maks 5MB)</p>
                   
                   {cvFileName ? (
@@ -938,7 +938,7 @@ export default function AdminDashboardPage() {
                   />
                   <label 
                     htmlFor="cv-upload" 
-                    className="inline-block mt-3 px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold cursor-pointer hover:opacity-90 shadow-md shadow-violet-900/40 transition-all text-xs"
+                    className="inline-block mt-3 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold cursor-pointer hover:opacity-90 shadow-md shadow-blue-900/40 transition-all text-xs"
                   >
                     {cvFileName ? 'Ganti File PDF' : 'Pilih File PDF CV'}
                   </label>
@@ -947,7 +947,7 @@ export default function AdminDashboardPage() {
 
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold text-sm tracking-wide mt-6"
+                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold text-sm tracking-wide mt-6"
               >
                 Simpan Perubahan Bio
               </button>
@@ -961,7 +961,7 @@ export default function AdminDashboardPage() {
       {showProjectModal && (
         <Portal>
           <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="glass-card w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-8 border border-white/20 bg-[#0a0015]">
+          <div className="glass-card w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-8 border border-white/20 bg-[#12161f]">
             <h3 className="text-xl font-bold text-white mb-4">
               {editingProject ? 'Edit Proyek' : 'Tambah Proyek Baru'}
             </h3>
@@ -984,10 +984,10 @@ export default function AdminDashboardPage() {
                   <select 
                     value={projectForm.category}
                     onChange={(e) => setProjectForm({ ...projectForm, category: e.target.value as ProjectCategory })}
-                    className="w-full p-3 rounded-xl glass-input bg-[#0a0015] text-white"
+                    className="w-full p-3 rounded-xl glass-input bg-[#12161f] text-white"
                   >
                     {categories.map(cat => (
-                      <option key={cat.id} value={cat.slug} className="bg-[#0a0015] text-white">
+                      <option key={cat.id} value={cat.slug} className="bg-[#12161f] text-white">
                         {cat.name}
                       </option>
                     ))}
@@ -1009,11 +1009,11 @@ export default function AdminDashboardPage() {
               <div>
                 <label className="block text-gray-300 mb-1 flex items-center justify-between">
                   <span>Thumbnail Image *</span>
-                  <span className="text-[10px] text-cyan-400">Upload File atau Input Link URL</span>
+                  <span className="text-[10px] text-blue-400">Upload File atau Input Link URL</span>
                 </label>
 
                 {/* Dropzone / Preview Box for Project Thumbnail */}
-                <div className="p-4 rounded-2xl border-2 border-dashed border-white/20 bg-white/[0.02] text-center hover:border-cyan-400/60 transition-colors mb-3">
+                <div className="p-4 rounded-2xl border-2 border-dashed border-white/20 bg-white/[0.02] text-center hover:border-blue-400/60 transition-colors mb-3">
                   {projectForm.thumbnail_url ? (
                     <div className="relative group rounded-xl overflow-hidden max-h-40 bg-black border border-white/10 mb-2">
                       <img 
@@ -1024,7 +1024,7 @@ export default function AdminDashboardPage() {
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <label 
                           htmlFor="proj-image-input" 
-                          className="px-3 py-1.5 rounded-lg bg-cyan-500 text-black font-bold cursor-pointer text-[11px] hover:bg-cyan-400"
+                          className="px-3 py-1.5 rounded-lg bg-blue-500 text-black font-bold cursor-pointer text-[11px] hover:bg-blue-400"
                         >
                           Ganti Gambar
                         </label>
@@ -1039,7 +1039,7 @@ export default function AdminDashboardPage() {
                     </div>
                   ) : (
                     <div className="py-3">
-                      <Upload className="w-7 h-7 text-cyan-400 mx-auto mb-1 animate-bounce" />
+                      <Upload className="w-7 h-7 text-blue-400 mx-auto mb-1 animate-bounce" />
                       <p className="text-gray-300 text-xs mb-0.5 font-bold">Pilih File Thumbnail Proyek (PNG, JPG, WEBP)</p>
                       <p className="text-[10px] text-gray-400">Pilih file gambar langsung dari perangkat Anda</p>
                     </div>
@@ -1056,7 +1056,7 @@ export default function AdminDashboardPage() {
                   {!projectForm.thumbnail_url && (
                     <label 
                       htmlFor="proj-image-input" 
-                      className="inline-block mt-2 px-4 py-1.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold cursor-pointer hover:opacity-90 shadow-md shadow-violet-900/40 transition-all text-xs"
+                      className="inline-block mt-2 px-4 py-1.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold cursor-pointer hover:opacity-90 shadow-md shadow-blue-900/40 transition-all text-xs"
                     >
                       Upload Gambar Proyek
                     </label>
@@ -1125,7 +1125,7 @@ export default function AdminDashboardPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold"
+                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold"
                 >
                   Simpan Proyek
                 </button>
@@ -1140,7 +1140,7 @@ export default function AdminDashboardPage() {
       {showCategoryModal && (
         <Portal>
           <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="glass-card w-full max-w-md rounded-3xl p-6 border border-white/20 bg-[#0a0015]">
+          <div className="glass-card w-full max-w-md rounded-3xl p-6 border border-white/20 bg-[#12161f]">
             <h3 className="text-xl font-bold text-white mb-4">Tambah Kategori Baru</h3>
             <form onSubmit={handleAddCategory} className="space-y-4 text-xs font-mono-tech">
               <div>
@@ -1165,7 +1165,7 @@ export default function AdminDashboardPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold"
+                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold"
                 >
                   Tambah Kategori
                 </button>
@@ -1180,7 +1180,7 @@ export default function AdminDashboardPage() {
       {showSkillModal && (
         <Portal>
           <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="glass-card w-full max-w-md rounded-3xl p-6 border border-white/20 bg-[#0a0015]">
+          <div className="glass-card w-full max-w-md rounded-3xl p-6 border border-white/20 bg-[#12161f]">
             <h3 className="text-xl font-bold text-white mb-4">Tambah Skill Baru</h3>
             <form onSubmit={handleAddSkill} className="space-y-4 text-xs font-mono-tech">
               <div>
@@ -1199,12 +1199,12 @@ export default function AdminDashboardPage() {
                 <select 
                   value={skillForm.category}
                   onChange={(e) => setSkillForm({ ...skillForm, category: e.target.value as any })}
-                  className="w-full p-3 rounded-xl glass-input bg-[#0a0015] text-white"
+                  className="w-full p-3 rounded-xl glass-input bg-[#12161f] text-white"
                 >
-                  <option value="frontend" className="bg-[#0a0015] text-white">Front-End</option>
-                  <option value="backend" className="bg-[#0a0015] text-white">Back-End</option>
-                  <option value="design" className="bg-[#0a0015] text-white">UI/UX Design</option>
-                  <option value="tools" className="bg-[#0a0015] text-white">Tools & DevOps</option>
+                  <option value="frontend" className="bg-[#12161f] text-white">Front-End</option>
+                  <option value="backend" className="bg-[#12161f] text-white">Back-End</option>
+                  <option value="design" className="bg-[#12161f] text-white">UI/UX Design</option>
+                  <option value="tools" className="bg-[#12161f] text-white">Tools & DevOps</option>
                 </select>
               </div>
 
@@ -1230,7 +1230,7 @@ export default function AdminDashboardPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold"
+                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold"
                 >
                   Tambah Skill
                 </button>
@@ -1245,7 +1245,7 @@ export default function AdminDashboardPage() {
       {showCertModal && (
         <Portal>
           <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="glass-card w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-8 border border-white/20 bg-[#0a0015]">
+          <div className="glass-card w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-8 border border-white/20 bg-[#12161f]">
             <h3 className="text-xl font-bold text-white mb-4">
               {editingCert ? 'Edit Sertifikat' : 'Tambah Sertifikat Baru'}
             </h3>
@@ -1314,11 +1314,11 @@ export default function AdminDashboardPage() {
               <div>
                 <label className="block text-gray-300 mb-1 flex items-center justify-between">
                   <span>Gambar / Tangkapan Layar Sertifikat *</span>
-                  <span className="text-[10px] text-cyan-400 font-bold">Upload File atau Input Link URL</span>
+                  <span className="text-[10px] text-blue-400 font-bold">Upload File atau Input Link URL</span>
                 </label>
 
                 {/* Dropzone & Live Image Preview Box */}
-                <div className="p-4 rounded-2xl border-2 border-dashed border-white/20 bg-white/[0.02] text-center hover:border-cyan-400/60 transition-colors mb-3">
+                <div className="p-4 rounded-2xl border-2 border-dashed border-white/20 bg-white/[0.02] text-center hover:border-blue-400/60 transition-colors mb-3">
                   {certForm.image_url ? (
                     <div className="relative group rounded-xl overflow-hidden max-h-48 bg-black border border-white/10 mb-2">
                       <img 
@@ -1329,7 +1329,7 @@ export default function AdminDashboardPage() {
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <label 
                           htmlFor="cert-image-input" 
-                          className="px-3.5 py-1.5 rounded-lg bg-cyan-500 text-black font-bold cursor-pointer text-[11px] hover:bg-cyan-400 transition-colors shadow-md"
+                          className="px-3.5 py-1.5 rounded-lg bg-blue-500 text-black font-bold cursor-pointer text-[11px] hover:bg-blue-400 transition-colors shadow-md"
                         >
                           Ganti Gambar
                         </label>
@@ -1344,7 +1344,7 @@ export default function AdminDashboardPage() {
                     </div>
                   ) : (
                     <div className="py-4">
-                      <Upload className="w-8 h-8 text-cyan-400 mx-auto mb-2 animate-bounce" />
+                      <Upload className="w-8 h-8 text-blue-400 mx-auto mb-2 animate-bounce" />
                       <p className="text-gray-200 text-xs mb-1 font-bold">Pilih File Gambar Sertifikat (PNG, JPG, WEBP)</p>
                       <p className="text-[10px] text-gray-400">Pilih berkas foto/scan sertifikat dari galeri komputer Anda</p>
                     </div>
@@ -1361,7 +1361,7 @@ export default function AdminDashboardPage() {
                   {!certForm.image_url && (
                     <label 
                       htmlFor="cert-image-input" 
-                      className="inline-block mt-2 px-5 py-2 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold cursor-pointer hover:opacity-90 shadow-md shadow-violet-900/40 transition-all text-xs"
+                      className="inline-block mt-2 px-5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold cursor-pointer hover:opacity-90 shadow-md shadow-blue-900/40 transition-all text-xs"
                     >
                       Pilih File Dari Komputer
                     </label>
@@ -1402,7 +1402,7 @@ export default function AdminDashboardPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold"
+                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold"
                 >
                   Simpan Sertifikat
                 </button>

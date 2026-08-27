@@ -36,7 +36,7 @@ export const ConstellationBackground: React.FC = () => {
       color: string;
     }
 
-    const colors = ['rgba(109, 40, 217, ', 'rgba(34, 211, 238, ', 'rgba(192, 132, 252, '];
+    const colors = ['rgba(59, 130, 246, ', 'rgba(96, 165, 250, ', 'rgba(37, 99, 235, '];
 
     const particles: Particle[] = Array.from({ length: numParticles }, () => ({
       x: Math.random() * width,
@@ -77,7 +77,7 @@ export const ConstellationBackground: React.FC = () => {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(109, 40, 217, ${alpha})`;
+            ctx.strokeStyle = `rgba(59, 130, 246, ${alpha})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }

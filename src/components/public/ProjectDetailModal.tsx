@@ -26,7 +26,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
     <Portal>
       <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
       <div 
-        className="relative w-full max-w-4xl max-h-[90vh] glass-card rounded-3xl border border-white/20 shadow-2xl overflow-y-auto bg-[#0a0015]/95 p-6 sm:p-8"
+        className="relative w-full max-w-4xl max-h-[90vh] glass-card rounded-3xl border border-white/20 shadow-2xl overflow-y-auto bg-[#12161f]/95 p-6 sm:p-8"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -55,7 +55,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
             />
           )}
           <div className="absolute top-4 left-4">
-            <span className="px-3.5 py-1 rounded-full bg-violet-900/80 backdrop-blur-md text-violet-300 font-mono-tech text-xs border border-violet-500/30 uppercase tracking-wider">
+            <span className="px-3.5 py-1 rounded-full bg-blue-900 text-blue-300 font-mono-tech text-xs border border-blue-500/30 uppercase tracking-wider">
               {project.category.replace('-', ' ')}
             </span>
           </div>
@@ -71,7 +71,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
             {project.tech_stack.map((tech, idx) => (
               <span 
                 key={idx}
-                className="px-3 py-1 rounded-md bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 text-xs font-mono-tech"
+                className="px-3 py-1 rounded-md bg-blue-500/10 text-blue-300 border border-blue-500/20 text-xs font-mono-tech"
               >
                 #{tech}
               </span>
@@ -82,7 +82,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
         {/* Description & Rich Content Case Study */}
         <div className="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed border-t border-white/10 pt-6 mb-8">
           <div>
-            <h4 className="text-xs font-mono-tech text-cyan-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
+            <h4 className="text-xs font-mono-tech text-blue-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
               <Sparkles className="w-4 h-4" /> {t.overview}
             </h4>
             <p className="text-gray-300">{displayDescription}</p>
@@ -90,7 +90,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
 
           {displayRichContent && (
             <div>
-              <h4 className="text-xs font-mono-tech text-violet-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
+              <h4 className="text-xs font-mono-tech text-blue-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
                 <Code2 className="w-4 h-4" /> {t.solution}
               </h4>
               <p className="text-gray-300 whitespace-pre-line">{displayRichContent}</p>
@@ -105,7 +105,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
               href={project.demo_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-medium text-sm flex items-center gap-2 shadow-lg shadow-violet-700/30"
+              className="px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium text-sm flex items-center gap-2 shadow-lg shadow-blue-700/30"
             >
               <ExternalLink className="w-4 h-4" /> {t.liveDemo}
             </a>
@@ -118,7 +118,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
               rel="noopener noreferrer"
               className="px-6 py-3 rounded-full glass-card hover:bg-white/10 text-gray-200 hover:text-white border border-white/15 text-sm flex items-center gap-2"
             >
-              <IconGithub className="w-4 h-4 text-violet-400" /> {t.githubRepo}
+              <IconGithub className="w-4 h-4 text-blue-400" /> {t.githubRepo}
             </a>
           )}
 

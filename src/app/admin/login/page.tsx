@@ -43,9 +43,9 @@ export default function AdminLoginPage() {
         
         {/* Top Logo Badge */}
         <div className="text-center mb-8">
-          <div className="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-tr from-violet-600 via-indigo-500 to-cyan-400 p-[2px] shadow-xl shadow-violet-900/50 mb-3">
-            <div className="w-full h-full bg-[#0a0015] rounded-[14px] flex items-center justify-center">
-              <Lock className="w-6 h-6 text-cyan-400" />
+          <div className="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-tr from-blue-600 via-blue-500 to-blue-400 p-[2px] shadow-xl shadow-blue-900/50 mb-3">
+            <div className="w-full h-full bg-[#12161f] rounded-[14px] flex items-center justify-center">
+              <Lock className="w-6 h-6 text-blue-400" />
             </div>
           </div>
           <h1 className="text-2xl font-extrabold text-white tracking-tight">
@@ -103,7 +103,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-bold text-sm shadow-lg shadow-violet-700/30 hover:shadow-cyan-500/40 transition-all flex items-center justify-center gap-2"
+              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 via-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold text-sm shadow-lg shadow-blue-700/30 hover:shadow-blue-500/40 transition-all flex items-center justify-center gap-2"
             >
               {loading ? (
                 <span className="inline-flex items-center gap-2">
@@ -120,7 +120,7 @@ export default function AdminLoginPage() {
           </form>
 
           <div className="mt-6 pt-5 border-t border-white/10 text-center">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-500/10 text-violet-300 text-[11px] font-mono-tech border border-violet-500/20">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 text-blue-300 text-[11px] font-mono-tech border border-blue-500/20">
               <ShieldCheck className="w-3.5 h-3.5" /> Diamankan dengan Supabase Auth
             </div>
           </div>

@@ -43,7 +43,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
         {/* Header */}
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-mono-tech mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-mono-tech mb-4">
               <FolderKanban className="w-3.5 h-3.5" />
               <span>{t.badge}</span>
             </div>
@@ -62,7 +62,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                   onClick={() => setSelectedCategory(tab.id)}
                   className={`px-5 py-2.5 rounded-full text-xs font-medium transition-all font-mono-tech ${
                     selectedCategory === tab.id
-                      ? 'bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 text-white shadow-lg shadow-violet-700/30 scale-105'
+                      ? 'bg-gradient-to-r from-blue-600 via-blue-600 to-blue-500 text-white shadow-lg shadow-blue-700/30 scale-105'
                       : 'glass-card text-gray-400 hover:text-white border-white/10'
                   }`}
                 >
@@ -78,7 +78,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
           {filteredProjects.map((project, index) => (
             <ScrollReveal key={project.id} delay={(index % 3) * 120}>
               <div onClick={() => setSelectedProject(project)}>
-                <TiltCard className="glass-card rounded-3xl overflow-hidden border border-white/10 group hover:border-violet-500/50 cursor-pointer flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:shadow-violet-900/30 h-full">
+                <TiltCard className="glass-card rounded-3xl overflow-hidden border border-white/10 group hover:border-blue-500/50 cursor-pointer flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:shadow-blue-900/30 h-full">
                   {/* Image Thumbnail Container */}
                   <div className="relative h-56 w-full overflow-hidden bg-black/40">
                     <img 
@@ -89,7 +89,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                     
                     {/* Category Badge Overlay */}
                     <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 rounded-full bg-[#0a0015]/80 backdrop-blur-md text-cyan-300 font-mono-tech text-[11px] border border-cyan-500/30 uppercase tracking-wider">
+                      <span className="px-3 py-1 rounded-full bg-[#12161f] text-blue-300 font-mono-tech text-[11px] border border-blue-500/30 uppercase tracking-wider">
                         {project.category.replace('-', ' ')}
                       </span>
                     </div>
@@ -97,7 +97,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                     {/* Video Play Icon if Content Creation */}
                     {project.embed_url && (
                       <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-colors">
-                        <div className="w-12 h-12 rounded-full bg-violet-600/90 text-white flex items-center justify-center shadow-lg shadow-violet-900/50 group-hover:scale-110 transition-transform">
+                        <div className="w-12 h-12 rounded-full bg-blue-600/90 text-white flex items-center justify-center shadow-lg shadow-blue-900/50 group-hover:scale-110 transition-transform">
                           <Play className="w-5 h-5 ml-0.5" />
                         </div>
                       </div>
@@ -107,7 +107,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                   {/* Card Content Body */}
                   <div className="p-6 flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors line-clamp-1">
+                      <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors line-clamp-1">
                         {language === 'en' && project.title_en ? project.title_en : project.title}
                       </h3>
                       <p className="text-gray-400 text-sm mb-4 line-clamp-2 leading-relaxed">
@@ -135,7 +135,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
 
                       {/* Card Bottom Links Bar */}
                       <div className="flex items-center justify-between pt-4 border-t border-white/10 text-xs text-gray-400">
-                        <span className="text-violet-400 group-hover:text-cyan-300 font-mono-tech flex items-center gap-1 font-medium">
+                        <span className="text-blue-400 group-hover:text-blue-300 font-mono-tech flex items-center gap-1 font-medium">
                           {t.caseStudy} &rarr;
                         </span>
 
@@ -146,7 +146,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                               target="_blank" 
                               rel="noopener noreferrer" 
                               title="Live Demo"
-                              className="p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-cyan-400 transition-colors"
+                              className="p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-blue-400 transition-colors"
                             >
                               <ExternalLink className="w-4 h-4" />
                             </a>
@@ -157,7 +157,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                               target="_blank" 
                               rel="noopener noreferrer"
                               title="GitHub Repo"
-                              className="p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-violet-400 transition-colors"
+                              className="p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-blue-400 transition-colors"
                             >
                               <IconGithub className="w-4 h-4" />
                             </a>

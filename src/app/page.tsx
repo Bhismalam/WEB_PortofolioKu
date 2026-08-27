@@ -59,7 +59,7 @@ export default async function HomePage() {
   const { profile, skills, certificates, projects, categories } = await getPortfolioData();
 
   return (
-    <main className="relative min-h-screen selection:bg-cyan-500 selection:text-black">
+    <main className="relative min-h-screen selection:bg-blue-500 selection:text-black">
       {/* Animated Constellation & Aurora Background */}
       <ConstellationBackground />
 
@@ -79,7 +79,7 @@ export default async function HomePage() {
       <PortfolioShowcase projects={projects} categories={categories} />
 
       {/* Contact Form Section */}
-      <ContactSection profile={profile} />
+      <ContactSection />
 
       {/* Footer */}
       <Footer />

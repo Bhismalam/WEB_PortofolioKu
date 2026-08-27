@@ -29,7 +29,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
     <Portal>
       <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-150">
         <div 
-          className="glass-card w-full max-w-md rounded-3xl p-6 sm:p-7 border border-rose-500/30 bg-[#0a0015]/95 shadow-2xl shadow-rose-950/40 relative"
+          className="glass-card w-full max-w-md rounded-3xl p-6 sm:p-7 border border-rose-500/30 bg-[#12161f]/95 shadow-2xl shadow-rose-950/40 relative"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Top Close Button */}
