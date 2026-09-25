@@ -1,0 +1,131 @@
+{
+  "title": "Pilih dunia visual portofolio Bhisma",
+  "question": "Undian menetapkan Sablon Distro. Ambil, pilih alternatif, atau undi ulang.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Sablon Distro",
+      "kicker": "THE ROLL",
+      "lineage": "Sablon manual distro Bandung/Jogja: poster gig, kaos, stiker cetak saring",
+      "thesis": "Setiap karya adalah cetakan yang ditarik dari layar: desain = separasi warna, kode = hasil cetak.",
+      "palette": ["#1B2BD6", "#FF5A1F", "#141414", "#E3E1DB"],
+      "materials": ["tinta plastisol flat tanpa bayangan", "kertas koran abu", "tanda registrasi & halftone kasar"],
+      "viewport": "Nama BHISMA dicetak raksasa dua lapis tinta (biru + oranye) yang sedikit meleset registrasinya; foto asli di kanan dalam bingkai layar sablon; strip proyek unggulan mengintip sebagai tumpukan cetakan di bawah lipatan; CV dan Kontak jadi dua label cetak yang selalu terlihat.",
+      "risk": "Bisa terasa 'kaos distro' murahan bila tipografi tidak disiplin; admin harus tetap terbaca sebagai alat kerja, bukan poster.",
+      "raised": [
+        { "from": "challenger-chaekgeori", "raise": "Inventaris utuh: setiap proyek/sertifikat menempati satu kotak cetak utuh, dan slot CMS yang kosong tampil sebagai layar sablon kosong yang sengaja dirancang." },
+        { "from": "challenger-vu", "raise": "Skill jadi deretan unit identik yang dibaca sekali sapu, bukan bar persentase karangan." },
+        { "from": "challenger-sand", "raise": "State = perubahan materi: aktif berarti tinta makin pekat/tertumpuk, tidak pernah glow." },
+        { "from": "challenger-dive", "raise": "Satu sumbu mengatur halaman: dari separasi (desain) turun ke hasil cetak (kode) ke kontak." },
+        { "from": "challenger-akari", "raise": "Hanya satu tanda oranye aktif per layar, seperti satu stempel." }
+      ]
+    },
+    {
+      "id": "model-pick",
+      "label": "Lembar Spesifikasi Redline",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "Handoff desain: redline, mode Inspect Figma, dokumentasi spesifikasi",
+      "thesis": "Portofolio sebagai file handoff: tiap elemen diberi garis ukur, dan satu sakelar mengubah anotasi desain menjadi kode.",
+      "palette": ["#F4F5F7", "#16181D", "#FF2E88", "#8A8F98"],
+      "materials": ["garis ukur & anotasi", "grid 8pt terlihat", "potongan kode monospace"],
+      "viewport": "Hero sebagai frame yang sedang diinspeksi: foto, nama, dan tombol dikelilingi redline berukuran; sakelar 'Desain ↔ Kode' di pojok mengubah semua anotasi jadi kode.",
+      "risk": "Paling dekat dengan portofolio desainer/dev lain; garis ukur bisa jadi gimmick kalau dipakai di mana-mana."
+    },
+    {
+      "id": "challenger-hypercard",
+      "label": "Tumpukan Kartu HyperCard",
+      "verdict": "competitive",
+      "lineage": "HyperCard Mac klasik: kartu 1-bit yang saling bertaut",
+      "thesis": "Alat membaca adalah alat membuat: halaman publik dan admin CMS adalah satu tumpukan kartu dalam dua mode.",
+      "palette": ["#FFFFFF", "#000000", "#8C8C8C"],
+      "materials": ["1-bit hitam putih", "dither stipple", "tombol lukisan tangan"],
+      "viewport": "Kartu pertama: foto di-dither, nama, dan tombol-tombol ke Karya, CV, Kontak; kembali menelusuri jejak persis.",
+      "case": "Menyatu kuat dengan CMS (baca & edit satu objek) — unggul kejelasan produk, kalah identifikasi: rekruter & klien tidak mengenal HyperCard.",
+      "risk": "Nostalgia Mac lama; foto 1-bit kehilangan kehangatan personal.",
+      "hero": "https://impeccable.style/worlds/cards/medium-native-hypercard-stack-shoebox-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/medium-native-hypercard-stack-shoebox.webp"
+    },
+    {
+      "id": "challenger-chaekgeori",
+      "label": "Lemari Chaekgeori",
+      "verdict": "declined",
+      "lineage": "Lukisan rak buku Korea berperspektif terbalik",
+      "thesis": "Karya sebagai inventaris rak yang membuka ke arah pengunjung.",
+      "palette": ["#3E7D6B", "#B8352B", "#EDE6D6"],
+      "materials": ["pigmen mineral", "garis kontur tanpa bayangan"],
+      "viewport": "Grid kotak rak berisi proyek dalam perspektif terbalik.",
+      "case": "Audiens Indonesia tidak mengenalinya; perspektif terbalik mengaburkan karya.",
+      "risk": "Terasa kostum budaya asing.",
+      "kept": "Setiap item satu kotak utuh; kotak kosong dirancang, bukan dibiarkan.",
+      "hero": "https://impeccable.style/worlds/cards/graphic-worlds-publishing-chaekgeori-reverse-perspective-hero.webp"
+    },
+    {
+      "id": "challenger-vu",
+      "label": "Deretan VU Meter",
+      "verdict": "declined",
+      "lineage": "Meja rekaman analog",
+      "thesis": "Skill dibaca seperti deretan jarum yang bergerak serempak.",
+      "palette": ["#F2EBDC", "#111111", "#C8241C"],
+      "materials": ["kaca meter", "jarum balistik"],
+      "viewport": "Deretan meter skill di layar pertama.",
+      "case": "Mengukur skill dengan jarum = klaim persentase yang tak bisa dibuktikan.",
+      "risk": "Angka palsu terasa dibuat-buat.",
+      "kept": "Unit identik yang diulang sebagai penggaris, dibaca sekali sapu.",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-vu-meter-bridge-hero.webp"
+    },
+    {
+      "id": "challenger-sand",
+      "label": "Glif Pasir Kinetik",
+      "verdict": "declined",
+      "lineage": "Panel kontrol Afrofuturis",
+      "thesis": "Navigasi lewat cincin glif yang berputar.",
+      "palette": ["#B8862F", "#3B2A1A", "#0E0E0E"],
+      "materials": ["pasir timbul", "cahaya emas"],
+      "viewport": "Cincin glif di tengah sebagai menu.",
+      "case": "Tidak relevan dengan dunia audiens; menyembunyikan konten di balik ritual.",
+      "risk": "Navigasi jadi teka-teki.",
+      "kept": "State sebagai perubahan materi, bukan efek cahaya.",
+      "hero": "https://impeccable.style/worlds/cards/kinetic-sand-glyphs-hero.webp"
+    },
+    {
+      "id": "challenger-dive",
+      "label": "Penyelaman Mesofotik",
+      "verdict": "declined",
+      "lineage": "Profil selam teknis",
+      "thesis": "Scroll sebagai penyelaman kedalaman.",
+      "palette": ["#0A1A3A", "#22D3EE", "#F5F7FA"],
+      "materials": ["salju laut", "angka dive computer"],
+      "viewport": "Permukaan turkuois turun ke kedalaman gelap.",
+      "case": "Metafora laut tidak berkaitan dengan desain & kode; mendekat ke gelap + neon.",
+      "risk": "Kembali ke klise gelap-neon.",
+      "kept": "Satu sumbu vertikal yang memberi makna pada posisi scroll.",
+      "hero": "https://impeccable.style/worlds/cards/rivers-tides-ocean-depths-mesophotic-deep-dive-hero.webp"
+    },
+    {
+      "id": "challenger-akari",
+      "label": "Bengkel Lampu Akari",
+      "verdict": "declined",
+      "lineage": "Lampu kertas washi Noguchi",
+      "thesis": "Karya sebagai volume kertas yang menyala.",
+      "palette": ["#EFE6D2", "#B08A5B", "#2A2A2A", "#D23A26"],
+      "materials": ["washi", "rusuk bambu"],
+      "viewport": "Ruang redup dengan lampu-lampu kertas.",
+      "case": "Hangat tapi lembut dan krem — tidak menunjukkan ketajaman teknis.",
+      "risk": "Jatuh ke palet krem yang umum.",
+      "kept": "Satu tanda stempel sebagai satu-satunya state aktif.",
+      "hero": "https://impeccable.style/worlds/cards/paper-folds-pleats-deployable-akari-light-sculpture-hero.webp"
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "buildPath": { "value": "code" },
+  "canon": true,
+  "canonCard": {
+    "label": "Standar kategori",
+    "thesis": "Portofolio developer yang bersih dan rapi seperti Linear/Vercel, dikerjakan dengan sangat baik.",
+    "palette": ["#0A0E14", "#12161F", "#E5E7EB", "#3B82F6"],
+    "materials": ["grid bersih", "kartu solid 1px", "foto natural"],
+    "viewport": "Foto dan perkenalan di kiri-kanan, CTA biru, proyek dalam grid kartu di bawahnya.",
+    "risk": "Sulit dibedakan dari ribuan portofolio lain — memang disengaja."
+  },
+  "steer": true
+}

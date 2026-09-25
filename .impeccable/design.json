@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-25T00:00:00Z",
+  "title": "Design System: Bhisma.dev",
+  "extensions": {
+    "colorMeta": {
+      "canvas": { "role": "neutral", "displayName": "White Canvas", "canonical": "#ffffff", "tonalRamp": ["#1d1d1f", "#424245", "#6e6e73", "#aeaeb8", "#c9c9d1", "#e3e3e8", "#f5f5f7", "#ffffff"] },
+      "canvas-2": { "role": "neutral", "displayName": "Soft Grey", "canonical": "#f5f5f7", "tonalRamp": ["#1d1d1f", "#424245", "#6e6e73", "#aeaeb8", "#c9c9d1", "#e3e3e8", "#ebebef", "#f5f5f7"] },
+      "canvas-3": { "role": "neutral", "displayName": "Pressed Grey", "canonical": "#ebebef", "tonalRamp": ["#1d1d1f", "#424245", "#6e6e73", "#aeaeb8", "#c9c9d1", "#e3e3e8", "#ebebef", "#f5f5f7"] },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#1d1d1f", "tonalRamp": ["#1d1d1f", "#424245", "#6e6e73", "#aeaeb8", "#c9c9d1", "#e3e3e8", "#ebebef", "#f5f5f7"] },
+      "ink-2": { "role": "neutral", "displayName": "Ink Secondary", "canonical": "#424245", "tonalRamp": ["#1d1d1f", "#424245", "#6e6e73", "#aeaeb8", "#c9c9d1", "#e3e3e8", "#ebebef", "#f5f5f7"] },
+      "ink-3": { "role": "neutral", "displayName": "Ink Tertiary", "canonical": "#6e6e73", "tonalRamp": ["#1d1d1f", "#424245", "#6e6e73", "#aeaeb8", "#c9c9d1", "#e3e3e8", "#ebebef", "#f5f5f7"] },
+      "line": { "role": "neutral", "displayName": "Hairline", "canonical": "#e3e3e8", "tonalRamp": ["#1d1d1f", "#424245", "#6e6e73", "#aeaeb8", "#c9c9d1", "#e3e3e8", "#ebebef", "#f5f5f7"] },
+      "line-strong": { "role": "neutral", "displayName": "Strong Hairline", "canonical": "#c9c9d1", "tonalRamp": ["#1d1d1f", "#424245", "#6e6e73", "#aeaeb8", "#c9c9d1", "#e3e3e8", "#ebebef", "#f5f5f7"] },
+      "accent": { "role": "primary", "displayName": "Electric Blue", "canonical": "#0058f0", "tonalRamp": ["#001a4d", "#002a7a", "#003ba8", "#0047c4", "#0058f0", "#4d8bff", "#a6c4ff", "#e8f0ff"] },
+      "accent-hover": { "role": "primary", "displayName": "Pressed Blue", "canonical": "#0047c4", "tonalRamp": ["#001a4d", "#002a7a", "#003ba8", "#0047c4", "#0058f0", "#4d8bff", "#a6c4ff", "#e8f0ff"] },
+      "accent-soft": { "role": "primary", "displayName": "Blue Wash", "canonical": "#e8f0ff", "tonalRamp": ["#001a4d", "#002a7a", "#003ba8", "#0047c4", "#0058f0", "#4d8bff", "#a6c4ff", "#e8f0ff"] },
+      "graphite": { "role": "secondary", "displayName": "Night Graphite", "canonical": "#0b0f15", "tonalRamp": ["#0b0f15", "#151a22", "#262d38", "#3a4250", "#5c6575", "#a3acbd", "#d3d8e0", "#f5f5f7"] },
+      "graphite-line": { "role": "secondary", "displayName": "Graphite Rule", "canonical": "#262d38", "tonalRamp": ["#0b0f15", "#151a22", "#262d38", "#3a4250", "#5c6575", "#a3acbd", "#d3d8e0", "#f5f5f7"] },
+      "on-graphite": { "role": "secondary", "displayName": "Paper on Graphite", "canonical": "#f5f5f7", "tonalRamp": ["#0b0f15", "#151a22", "#262d38", "#3a4250", "#5c6575", "#a3acbd", "#d3d8e0", "#f5f5f7"] },
+      "on-graphite-2": { "role": "secondary", "displayName": "Mist on Graphite", "canonical": "#a3acbd", "tonalRamp": ["#0b0f15", "#151a22", "#262d38", "#3a4250", "#5c6575", "#a3acbd", "#d3d8e0", "#f5f5f7"] },
+      "success": { "role": "status", "displayName": "Available Green", "canonical": "#0a7d4f", "tonalRamp": ["#04331f", "#06502f", "#0a7d4f", "#2f9a6c", "#63b891", "#9fd6bb", "#cdebdc", "#e6f5ee"] },
+      "success-soft": { "role": "status", "displayName": "Green Wash", "canonical": "#e6f5ee", "tonalRamp": ["#04331f", "#06502f", "#0a7d4f", "#2f9a6c", "#63b891", "#9fd6bb", "#cdebdc", "#e6f5ee"] },
+      "danger": { "role": "status", "displayName": "Alert Red", "canonical": "#c4302b", "tonalRamp": ["#4a1210", "#7a1d1a", "#a82824", "#c4302b", "#dc5e59", "#ec9895", "#f7c9c7", "#fdecec"] },
+      "danger-soft": { "role": "status", "displayName": "Red Wash", "canonical": "#fdecec", "tonalRamp": ["#4a1210", "#7a1d1a", "#a82824", "#c4302b", "#dc5e59", "#ec9895", "#f7c9c7", "#fdecec"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero statement only (44px mobile, 60px sm, 68px lg); the contact headline reuses it at 48 to 60px." },
+      "headline": { "displayName": "Headline", "purpose": "Section titles, 36px mobile to 48px, followed by a 17px Ink Tertiary subtitle." },
+      "title": { "displayName": "Title", "purpose": "Featured project and login heading; case-study title scales to 40px." },
+      "title-sm": { "displayName": "Title Small", "purpose": "Grid project titles and dialog headings." },
+      "body": { "displayName": "Body", "purpose": "Descriptions and case-study prose, 52 to 65ch." },
+      "body-sm": { "displayName": "Body Small", "purpose": "Button labels, secondary descriptions, link actions." },
+      "label": { "displayName": "Label", "purpose": "Form labels, nav links, meta lines, sentence-case subheads." },
+      "mono": { "displayName": "Mono", "purpose": "Tech-stack names, skill durations (tabular), credential IDs only." }
+    },
+    "shadows": [
+      { "name": "scroll-hairline", "value": "0 1px 0 var(--color-line)", "purpose": "Nav bar once the page scrolls or the menu opens." },
+      { "name": "segment-lift", "value": "0 1px 2px rgb(0 0 0 / 0.12)", "purpose": "Active segment of the language switch." },
+      { "name": "floating-control", "value": "0 2px 10px rgb(0 0 0 / 0.18)", "purpose": "White pills laid over imagery (watch badge, dialog close)." },
+      { "name": "card-rest", "value": "0 1px 2px rgb(0 0 0 / 0.06), 0 12px 40px rgb(0 0 0 / 0.06)", "purpose": "Standalone white card on a grey ground (login)." },
+      { "name": "sheet", "value": "0 24px 80px rgb(0 0 0 / 0.28)", "purpose": "Modal dialog sheets over the scrim rgb(10 12 16 / 0.55)." },
+      { "name": "focus-halo", "value": "0 0 0 4px rgb(0 88 240 / 0.14)", "purpose": "Focused form fields, paired with an Electric Blue border." }
+    ],
+    "motion": [
+      { "name": "ease-out-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The one easing for entrances, sheet entry, image hover, and view transitions." },
+      { "name": "rise", "value": "900ms ease-out-expo, from translateY(14px) opacity 0.35", "purpose": "Hero text entrance, staggered 80 to 260ms." },
+      { "name": "unveil", "value": "1200ms ease-out-expo, clip-path inset(12% 8%) round 28px and scale 1.04 to none", "purpose": "Hero portrait entrance." },
+      { "name": "sheet-in", "value": "500ms ease-out-expo, from translateY(24px) opacity 0", "purpose": "Dialog sheet entry." },
+      { "name": "scrim-in", "value": "300ms ease-out, opacity 0 to 1", "purpose": "Dialog scrim fade." },
+      { "name": "shared-element", "value": "550ms ease-out-expo view transition", "purpose": "Project image grows into the case-study media." },
+      { "name": "media-hover", "value": "700ms ease-out-expo, scale 1.03", "purpose": "Project image hover." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one blue action per group: view work, send message, sign in, live demo.",
+      "html": "<button class=\"ds-btn-primary\">Lihat karya <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14\"/><path d=\"m19 12-7 7-7-7\"/></svg></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; height: 48px; padding: 0 24px; border: none; border-radius: 9999px; background: var(--color-accent, #0058f0); color: #ffffff; font-family: var(--font-sans, Geist, system-ui, sans-serif); font-size: 15px; font-weight: 500; cursor: pointer; transition: background-color 0.15s ease; } .ds-btn-primary:hover { background: var(--color-accent-hover, #0047c4); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-accent, #0058f0); outline-offset: 3px; }"
+    },
+    {
+      "name": "Tonal Button",
+      "kind": "button",
+      "refersTo": "button-tonal",
+      "description": "Secondary action beside a primary: GitHub, Figma, send again.",
+      "html": "<button class=\"ds-btn-tonal\">GitHub</button>",
+      "css": ".ds-btn-tonal { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 20px; border: none; border-radius: 9999px; background: var(--color-canvas-2, #f5f5f7); color: var(--color-ink, #1d1d1f); font-family: var(--font-sans, Geist, system-ui, sans-serif); font-size: 15px; font-weight: 500; cursor: pointer; transition: background-color 0.15s ease; } .ds-btn-tonal:hover { background: var(--color-canvas-3, #ebebef); } .ds-btn-tonal:focus-visible { outline: 2px solid var(--color-accent, #0058f0); outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Button",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "Unfilled blue action with a wash on hover (hero CV download).",
+      "html": "<button class=\"ds-btn-text\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 17V3\"/><path d=\"m6 11 6 6 6-6\"/><path d=\"M19 21H5\"/></svg> Unduh CV</button>",
+      "css": ".ds-btn-text { display: inline-flex; align-items: center; gap: 8px; height: 48px; padding: 0 20px; border: none; border-radius: 9999px; background: transparent; color: var(--color-accent, #0058f0); font-family: var(--font-sans, Geist, system-ui, sans-serif); font-size: 15px; font-weight: 500; cursor: pointer; transition: background-color 0.15s ease; } .ds-btn-text:hover { background: var(--color-accent-soft, #e8f0ff); } .ds-btn-text:focus-visible { outline: 2px solid var(--color-accent, #0058f0); outline-offset: 3px; }"
+    },
+    {
+      "name": "Filter Chips",
+      "kind": "chip",
+      "refersTo": "chip-filter",
+      "description": "Project category filter; the active chip inverts to ink.",
+      "html": "<div class=\"ds-chips\" role=\"group\"><button class=\"ds-chip\" aria-pressed=\"true\">Semua</button><button class=\"ds-chip\" aria-pressed=\"false\">Web Dev</button><button class=\"ds-chip\" aria-pressed=\"false\">UI/UX Design</button></div>",
+      "css": ".ds-chips { display: flex; gap: 4px; } .ds-chip { height: 36px; padding: 0 16px; border: none; border-radius: 9999px; background: transparent; color: var(--color-ink-2, #424245); font-family: var(--font-sans, Geist, system-ui, sans-serif); font-size: 14px; font-weight: 500; cursor: pointer; transition: background-color 0.15s ease, color 0.15s ease; } .ds-chip:hover { background: var(--color-canvas-2, #f5f5f7); color: var(--color-ink, #1d1d1f); } .ds-chip[aria-pressed=\"true\"] { background: var(--color-ink, #1d1d1f); color: var(--color-canvas, #ffffff); } .ds-chip:focus-visible { outline: 2px solid var(--color-accent, #0058f0); outline-offset: 3px; }"
+    },
+    {
+      "name": "Tech Tag",
+      "kind": "chip",
+      "refersTo": "tag-mono",
+      "description": "Tech-stack name in the case study; the one place mono sits in a container.",
+      "html": "<ul class=\"ds-tags\"><li class=\"ds-tag\">Next.js</li><li class=\"ds-tag\">Supabase</li><li class=\"ds-tag\">Tailwind</li></ul>",
+      "css": ".ds-tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; } .ds-tag { padding: 4px 8px; border-radius: 6px; background: var(--color-canvas-2, #f5f5f7); color: var(--color-ink-2, #424245); font-family: var(--font-mono, 'Geist Mono', ui-monospace, monospace); font-size: 13px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "The shared .field used by contact, login, and admin forms.",
+      "html": "<label class=\"ds-label\" for=\"ds-name\">Nama</label><input id=\"ds-name\" class=\"ds-field\" placeholder=\"Nama lengkap\" />",
+      "css": ".ds-label { display: block; margin-bottom: 8px; font-family: var(--font-sans, Geist, system-ui, sans-serif); font-size: 14px; font-weight: 500; color: var(--color-ink, #1d1d1f); } .ds-field { width: 100%; background: var(--color-canvas, #ffffff); border: 1px solid var(--color-line-strong, #c9c9d1); border-radius: 12px; color: var(--color-ink, #1d1d1f); font-family: var(--font-sans, Geist, system-ui, sans-serif); font-size: 15px; padding: 12px 14px; transition: border-color 0.15s ease, box-shadow 0.15s ease; } .ds-field::placeholder { color: var(--color-ink-3, #6e6e73); } .ds-field:hover { border-color: #aeaeb8; } .ds-field:focus { outline: none; border-color: var(--color-accent, #0058f0); box-shadow: 0 0 0 4px rgb(0 88 240 / 0.14); }"
+    },
+    {
+      "name": "Navigation Bar",
+      "kind": "nav",
+      "refersTo": "nav-bar",
+      "description": "Fixed white bar: first name, centered anchor links, language switch, ink CV pill.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-nav-brand\" href=\"#\">Bhisma</a><nav><ul class=\"ds-nav-links\"><li><a href=\"#\">Karya</a></li><li><a href=\"#\">Keahlian</a></li><li><a href=\"#\">Sertifikat</a></li><li><a href=\"#\">Kontak</a></li></ul></nav><div class=\"ds-nav-end\"><div class=\"ds-lang\" role=\"group\"><button aria-pressed=\"true\">id</button><button aria-pressed=\"false\">en</button></div><a class=\"ds-nav-cv\" href=\"#\">Unduh CV</a></div></header>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 32px; background: var(--color-canvas, #ffffff); box-shadow: 0 1px 0 var(--color-line, #e3e3e8); font-family: var(--font-sans, Geist, system-ui, sans-serif); } .ds-nav-brand { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; color: var(--color-ink, #1d1d1f); text-decoration: none; } .ds-nav-links { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; font-size: 14px; } .ds-nav-links a { color: var(--color-ink-2, #424245); text-decoration: none; transition: color 0.15s ease; } .ds-nav-links a:hover { color: var(--color-ink, #1d1d1f); } .ds-nav-end { display: flex; align-items: center; gap: 12px; } .ds-lang { display: inline-flex; padding: 2px; border-radius: 9999px; background: var(--color-canvas-2, #f5f5f7); } .ds-lang button { height: 28px; min-width: 36px; padding: 0 10px; border: none; border-radius: 9999px; background: transparent; color: var(--color-ink-3, #6e6e73); font-size: 12px; font-weight: 500; text-transform: uppercase; cursor: pointer; } .ds-lang button[aria-pressed=\"true\"] { background: var(--color-canvas, #ffffff); color: var(--color-ink, #1d1d1f); box-shadow: 0 1px 2px rgb(0 0 0 / 0.12); } .ds-nav-cv { display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 9999px; background: var(--color-ink, #1d1d1f); color: var(--color-canvas, #ffffff); font-size: 14px; font-weight: 500; text-decoration: none; transition: background-color 0.15s ease; } .ds-nav-cv:hover { background: var(--color-ink-2, #424245); }"
+    },
+    {
+      "name": "Project Card",
+      "kind": "card",
+      "refersTo": "project-media",
+      "description": "Unboxed project: rounded media, title that turns blue on hover, mono tech meta.",
+      "html": "<article class=\"ds-project\"><div class=\"ds-project-media\"><div class=\"ds-project-img\"></div></div><h3 class=\"ds-project-title\">Aura Dashboard</h3><p class=\"ds-project-desc\">Dashboard analitik untuk tim pemasaran kecil.</p><p class=\"ds-project-meta\">Web Dev · <span>Next.js, Supabase</span></p></article>",
+      "css": ".ds-project { max-width: 420px; font-family: var(--font-sans, Geist, system-ui, sans-serif); cursor: pointer; } .ds-project-media { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 20px; background: var(--color-canvas-2, #f5f5f7); } .ds-project-img { width: 100%; height: 100%; background: var(--color-canvas-3, #ebebef); transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); } .ds-project:hover .ds-project-img { transform: scale(1.03); } .ds-project-title { margin: 20px 0 0; font-size: 20px; font-weight: 600; letter-spacing: -0.02em; color: var(--color-ink, #1d1d1f); transition: color 0.15s ease; } .ds-project:hover .ds-project-title { color: var(--color-accent, #0058f0); } .ds-project-desc { margin: 6px 0 0; font-size: 15px; line-height: 1.625; color: var(--color-ink-2, #424245); } .ds-project-meta { margin: 12px 0 0; font-size: 14px; color: var(--color-ink-3, #6e6e73); } .ds-project-meta span { font-family: var(--font-mono, 'Geist Mono', ui-monospace, monospace); font-size: 13px; }"
+    },
+    {
+      "name": "Graphite Skill List",
+      "kind": "custom",
+      "refersTo": "graphite",
+      "description": "The one dark band: hairline-divided skill rows with mono durations.",
+      "html": "<div class=\"ds-graphite\"><h3>Frontend</h3><ul><li><span>React</span><span class=\"ds-dur\">3 Thn</span></li><li><span>Next.js</span><span class=\"ds-dur\">2 Thn</span></li><li><span>Tailwind CSS</span><span class=\"ds-dur\">2 Thn</span></li></ul></div>",
+      "css": ".ds-graphite { padding: 32px; background: var(--color-graphite, #0b0f15); color: var(--color-on-graphite, #f5f5f7); font-family: var(--font-sans, Geist, system-ui, sans-serif); } .ds-graphite h3 { margin: 0 0 12px; font-size: 15px; font-weight: 600; } .ds-graphite ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--color-graphite-line, #262d38); border-bottom: 1px solid var(--color-graphite-line, #262d38); } .ds-graphite li { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 14px 0; font-size: 17px; } .ds-graphite li + li { border-top: 1px solid var(--color-graphite-line, #262d38); } .ds-dur { font-family: var(--font-mono, 'Geist Mono', ui-monospace, monospace); font-size: 13px; font-variant-numeric: tabular-nums; color: var(--color-on-graphite-2, #a3acbd); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Daylight Studio",
+    "overview": "A personal site read in daylight on an office laptop or a phone: white and near-white grounds, near-black ink, and a single electric blue that means \"you can act here.\" The page is calm and exact rather than decorated. Hierarchy comes from large, tightly tracked Geist headlines, generous whitespace, and a small number of soft-cornered photographs; almost nothing is boxed, outlined, or ornamented. One graphite band in the middle of the page holds the skills and gives the scroll a single change of light.\n\nDensity is low on the public page and moderate in the admin. Content is CMS-driven and uneven, so structure is carried by type, spacing, and hairline rules rather than by containers that would look empty or overstuffed. The world explicitly replaces an earlier dark neon and glass look: no glow, no glass, no gradient text, no eyebrow badges, no typewriter effects, no invented stats or percentage bars.\n\nMotion is spent in one place. The hero rises and the portrait unveils with an exponential ease-out; everything else is visible by default and changes state with short color transitions. The signature interaction is the shared-element case study: a project image grows into the detail sheet through a view transition.",
+    "keyCharacteristics": [
+      "Light world: white and #F5F5F7 grounds, #1D1D1F ink, one graphite band.",
+      "One blue, for actions and links only.",
+      "Geist set large with tight negative tracking; Geist Mono only for tech names, durations, and IDs.",
+      "Pill-shaped controls; generously rounded photographs (20 to 28px).",
+      "Unboxed content on white: spacing and hairline rules instead of bordered cards.",
+      "One orchestrated entrance; shared-element growth into the case study."
+    ],
+    "rules": [
+      { "name": "The One Blue Rule", "body": "Blue marks what is clickable and nothing else. If an element is not a link, button, focus ring, or selection, it is not blue.", "section": "colors" },
+      { "name": "The One Band Rule", "body": "The page has exactly one graphite section. Every other section alternates between white and soft grey.", "section": "colors" },
+      { "name": "The Mono Means Data Rule", "body": "Geist Mono appears only on machine-ish data: tech names, durations, dates-as-data, and IDs. Never on headings, labels, or prose.", "section": "typography" },
+      { "name": "The Sentence Case Rule", "body": "Labels and subheads are sentence case at normal tracking. The only uppercase text is the two-letter language code in the language switch.", "section": "typography" },
+      { "name": "The Only-If-Floating Rule", "body": "A shadow means the element sits above the page (overlay, sheet, floating control, sticky bar). In-flow content never carries one.", "section": "elevation" },
+      { "name": "The No Box On White Rule", "body": "Cards, projects, and list items on a white ground are not outlined or shadowed. Separate them with spacing, and use hairline rules only to divide rows of a list.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do keep blue for actions, links, focus, and selection only (The One Blue Rule).",
+      "Do alternate white and soft-grey sections, with exactly one graphite band.",
+      "Do make every button, chip, and switch a full pill; use 44 to 48px heights for primary touch targets.",
+      "Do set headings in Geist 600 with negative tracking (-0.02em to -0.04em) and balanced wrapping.",
+      "Do use Geist Mono at 13px only for tech names, durations, and IDs.",
+      "Do round photographs and media generously (20 to 28px) and give them a Soft Grey placeholder.",
+      "Do separate content on white with spacing, and divide lists with 1px hairlines.",
+      "Do keep motion to the hero entrance, the case-study growth, sheet entry, and short color transitions, all using `cubic-bezier(0.16, 1, 0.3, 1)` and all disabled under reduced motion.",
+      "Do design every list for zero, one, and many CMS items, and for missing optional links."
+    ],
+    "donts": [
+      "Don't use glow, glass or backdrop blur, gradient text, or colored shadows.",
+      "Don't add eyebrow or kicker labels above headings, or uppercase tracked labels.",
+      "Don't show invented stats, percentage skill bars, or typewriter headlines.",
+      "Don't outline or shadow cards that sit in-flow on a white ground.",
+      "Don't introduce a second accent hue; status green and red are for status only.",
+      "Don't put Geist Mono on headings, labels, or body copy.",
+      "Don't use rectangular or small-radius (8 to 12px) buttons."
+    ]
+  }
+}
